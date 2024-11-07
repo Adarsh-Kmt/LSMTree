@@ -49,7 +49,7 @@ func SkipListInit(kv map[int]string) *SkipList {
 
 	sl := &SkipList{numberOfLevels: 16, maxLevel: 0}
 
-	sentinel := &Node{key: math.MaxInt, value: "sentinel"}
+	sentinel := &Node{key: math.MinInt, value: "sentinel"}
 
 	globalNext := make([]*Node, 16)
 
@@ -107,4 +107,72 @@ func (sl *SkipList) DisplaySkipList() {
 		currNode = currNode.next[0]
 	}
 	logger.Println("-----------------------------------")
+}
+
+func (sl *SkipList) InsertItem(key int, value string) {
+
+	predecessors := make([]*Node, 16)
+
+	for i := 0; i < len(predecessors); i++ {
+		predecessors[i] = sl.Sentinel
+	}
+
+	currNode := sl.Sentinel
+
+	newNode := &Node{key: key, value: value, next: make([]*Node, 16)}
+
+	for currNode != nil {
+
+		if currNode.key > key {
+			break
+		}
+
+		currLevel := currNode.maxLevel
+
+		for i := 0; i <= currLevel; i++ {
+			predecessors[i] = currNode
+		}
+		nextNode := currNode.next[currNode.maxLevel]
+
+		for currLevel > 0 && (nextNode == nil || nextNode.key > key) {
+			currLevel--
+			nextNode = currNode.next[currLevel]
+		}
+		currNode = nextNode
+	}
+
+	for index, predecessorNode := range predecessors {
+		fmt.Printf("predecessor node at level %d is => key : %d\n", index, predecessorNode.key)
+	}
+	fmt.Println()
+	maxLevel := 0
+
+	for isHead() {
+		maxLevel++
+	}
+	newNode.maxLevel = maxLevel
+	for i := 0; i <= maxLevel; i++ {
+
+		if predecessors[i] != nil {
+			newNode.next[i] = predecessors[i].next[i]
+			predecessors[i].next[i] = newNode
+
+		} else {
+
+			currPredecessor := predecessors[i]
+
+			for j := i + 1; j < len(predecessors) && currPredecessor == nil; j++ {
+				currPredecessor = predecessors[j]
+			}
+
+			if currPredecessor != nil {
+
+				newNode.next[i] = currPredecessor.next[i]
+				currPredecessor.next[i] = newNode
+			} else {
+				// new node has a level greater than the greatest level currently seen by the skip list
+				sl.maxLevel = i
+			}
+		}
+	}
 }
