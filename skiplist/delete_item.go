@@ -2,7 +2,33 @@ package skiplist
 
 import "fmt"
 
-func (sl *SkipList) SearchItem(key int) (value string, found bool) {
+func (sl *SkipList) DeleteItem(key int) (value string, err error) {
+
+	//predecessors := sl.getPredecessors(key)
+
+	nd := sl.findItem(key)
+
+	if nd == nil {
+		return "", fmt.Errorf("node having key %d not found in skip list", key)
+	}
+
+	nd.tombStoneActivated = true
+
+	return nd.value, nil
+	// for index, predecessor := range predecessors {
+
+	// 	if index > nd.maxLevel {
+	// 		break
+	// 	}
+	// 	if predecessor != nil {
+	// 		predecessor.next[index] = nd.next[index]
+	// 	}
+	// }
+
+	// return nd.value, nil
+}
+
+func (sl *SkipList) findItem(key int) (nd *Node) {
 
 	//logger.Println("-------- SEARCH SKIP LIST --------")
 
@@ -12,12 +38,8 @@ func (sl *SkipList) SearchItem(key int) (value string, found bool) {
 
 		//fmt.Printf("currently at node with key %d \n", currNode.key)
 		if currNode.key == key {
-
-			if currNode.tombStoneActivated {
-				return "", false
-			}
 			//logger.Println("-----------------------------------")
-			return currNode.value, true
+			return currNode
 
 		}
 		currLevel := currNode.maxLevel
@@ -30,10 +52,10 @@ func (sl *SkipList) SearchItem(key int) (value string, found bool) {
 		}
 
 		currNode = nextNode
-		fmt.Println()
+		//fmt.Println()
 	}
 
 	//logger.Println("-----------------------------------")
 
-	return "", false
+	return nil
 }

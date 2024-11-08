@@ -11,10 +11,26 @@ import (
 )
 
 type Node struct {
-	key      int
-	value    string
-	next     []*Node
-	maxLevel int
+	key                int
+	value              string
+	next               []*Node
+	maxLevel           int
+	tombStoneActivated bool
+}
+
+type SkipList struct {
+	Sentinel   *Node
+	globalNext []*Node
+
+	numberOfLevels int
+	maxLevel       int
+
+	MaxKey int
+	MinKey int
+
+	IsFrozen bool
+
+	Size int
 }
 
 var (
@@ -26,76 +42,6 @@ func isHead() bool {
 	return coin.Intn(2) == 0
 }
 
-type SkipList struct {
-	Sentinel       *Node
-	numberOfLevels int
-	maxLevel       int
-	Tail           *Node
-}
-
-func SkipListInit(kv map[int]string) *SkipList {
-
-	logger.Println("-------- INSERT SKIP LIST --------")
-
-	sortedKeys := make([]int, len(kv))
-
-	i := 0
-	for key := range kv {
-		sortedKeys[i] = key
-		i++
-	}
-
-	slices.Sort(sortedKeys)
-
-	sl := &SkipList{numberOfLevels: 16, maxLevel: 0}
-
-	sentinel := &Node{key: math.MinInt, value: "sentinel"}
-
-	globalNext := make([]*Node, 16)
-
-	for i := range globalNext {
-		globalNext[i] = sentinel
-	}
-
-	sentinel.next = make([]*Node, 16)
-
-	for _, key := range sortedKeys {
-
-		value := kv[key]
-
-		nd := &Node{key: key, value: value, next: make([]*Node, 16)}
-		fmt.Printf("new node with key : %d value : %s created\n", nd.key, nd.value)
-		currLevel := 0
-
-		for isHead() {
-			fmt.Printf("coin is heads, node with key %d initially at level %d increases to level %d\n", nd.key, currLevel, currLevel+1)
-			globalNext[currLevel].next[currLevel] = nd
-			globalNext[currLevel] = nd
-			nd.maxLevel = currLevel
-			if currLevel > sl.maxLevel {
-				sl.maxLevel = currLevel
-			}
-			currLevel++
-
-		}
-		if currLevel == 0 {
-			fmt.Printf("coin is heads, node with key %d remains at level %d\n", nd.key, currLevel)
-			globalNext[currLevel].next[currLevel] = nd
-			globalNext[currLevel] = nd
-			nd.maxLevel = 0
-		}
-		fmt.Println()
-	}
-
-	logger.Println("-----------------------------------")
-
-	sentinel.maxLevel = sl.maxLevel
-	sl.Sentinel = sentinel
-
-	return sl
-
-}
-
 func (sl *SkipList) DisplaySkipList() {
 
 	currNode := sl.Sentinel
@@ -103,15 +49,15 @@ func (sl *SkipList) DisplaySkipList() {
 	logger.Println("-------- DISPLAY SKIP LIST --------")
 	fmt.Printf("SkipList max level %d : \n", sl.maxLevel)
 	for currNode != nil {
-		fmt.Printf("key : %d value : %s maximum level reached : %d\n", currNode.key, currNode.value, currNode.maxLevel)
+		fmt.Printf("key : %d value : %s  tombstone : %t maximum level reached : %d\n", currNode.key, currNode.value, currNode.tombStoneActivated, currNode.maxLevel)
 		currNode = currNode.next[0]
 	}
 	logger.Println("-----------------------------------")
 }
 
-func (sl *SkipList) InsertItem(key int, value string) {
+func (sl *SkipList) getPredecessors(key int) (predecessors []*Node) {
 
-	predecessors := make([]*Node, 16)
+	predecessors = make([]*Node, sl.numberOfLevels)
 
 	for i := 0; i < len(predecessors); i++ {
 		predecessors[i] = sl.Sentinel
@@ -119,11 +65,9 @@ func (sl *SkipList) InsertItem(key int, value string) {
 
 	currNode := sl.Sentinel
 
-	newNode := &Node{key: key, value: value, next: make([]*Node, 16)}
-
 	for currNode != nil {
 
-		if currNode.key > key {
+		if currNode.key >= key {
 			break
 		}
 
@@ -134,23 +78,40 @@ func (sl *SkipList) InsertItem(key int, value string) {
 		}
 		nextNode := currNode.next[currNode.maxLevel]
 
-		for currLevel > 0 && (nextNode == nil || nextNode.key > key) {
+		for currLevel > 0 && (nextNode == nil || nextNode.key >= key) {
 			currLevel--
 			nextNode = currNode.next[currLevel]
 		}
 		currNode = nextNode
 	}
 
-	for index, predecessorNode := range predecessors {
-		fmt.Printf("predecessor node at level %d is => key : %d\n", index, predecessorNode.key)
-	}
-	fmt.Println()
+	// for index, predecessorNode := range predecessors {
+	// 	fmt.Printf("predecessor node at level %d is => key : %d\n", index, predecessorNode.key)
+	// }
+	// fmt.Println()
+
+	return predecessors
+}
+
+func (sl *SkipList) InsertItem(key int, value string) {
+
+	sl.Size++
+	predecessors := sl.getPredecessors(key)
+
+	newNode := &Node{
+		key:                key,
+		value:              value,
+		next:               make([]*Node, sl.numberOfLevels),
+		tombStoneActivated: false}
+
 	maxLevel := 0
 
 	for isHead() {
 		maxLevel++
 	}
+
 	newNode.maxLevel = maxLevel
+
 	for i := 0; i <= maxLevel; i++ {
 
 		if predecessors[i] != nil {
@@ -175,4 +136,118 @@ func (sl *SkipList) InsertItem(key int, value string) {
 			}
 		}
 	}
+}
+
+func SkipListInit(numberOfLevels int) *SkipList {
+
+	sentinel := &Node{
+		key:                math.MinInt,
+		value:              "sentinel",
+		tombStoneActivated: false,
+		next:               make([]*Node, numberOfLevels),
+	}
+
+	sl := &SkipList{
+		numberOfLevels: numberOfLevels,
+		maxLevel:       0,
+
+		MinKey: math.MaxInt,
+		MaxKey: math.MinInt,
+
+		IsFrozen: false,
+
+		Size:       0,
+		Sentinel:   sentinel,
+		globalNext: make([]*Node, numberOfLevels),
+	}
+
+	for i := 0; i < numberOfLevels; i++ {
+		sl.globalNext[i] = sentinel
+	}
+
+	return sl
+
+}
+
+func (sl *SkipList) SetupSkipList(kv map[int]string) {
+
+	sortedKeys := make([]int, len(kv))
+
+	i := 0
+	for key := range kv {
+		sortedKeys[i] = key
+		i++
+	}
+
+	slices.Sort(sortedKeys)
+
+	for _, key := range sortedKeys {
+		sl.InsertItem(key, kv[key])
+	}
+
+}
+
+func (sl *SkipList) BatchInsertItem(kv map[int]string) {
+
+	sortedKeys := make([]int, len(kv))
+
+	i := 0
+	for key := range kv {
+		sortedKeys[i] = key
+		i++
+	}
+
+	slices.Sort(sortedKeys)
+
+	if test := true; test {
+
+		for _, key := range sortedKeys {
+			sl.InsertItem(key, kv[key])
+		}
+		return
+	}
+
+	for _, key := range sortedKeys {
+
+		if key < sl.MinKey {
+			sl.MinKey = key
+		}
+
+		if key > sl.MaxKey {
+			sl.MaxKey = key
+		}
+		value := kv[key]
+
+		nd := &Node{key: key,
+			value:              value,
+			next:               make([]*Node, 16),
+			tombStoneActivated: false}
+
+		//fmt.Printf("new node with key : %d value : %s created\n", nd.key, nd.value)
+		currLevel := 0
+
+		for isHead() {
+			//fmt.Printf("coin is heads, node with key %d initially at level %d increases to level %d\n", nd.key, currLevel, currLevel+1)
+			sl.globalNext[currLevel].next[currLevel] = nd
+			sl.globalNext[currLevel] = nd
+			nd.maxLevel = currLevel
+			if currLevel > sl.maxLevel {
+				sl.maxLevel = currLevel
+			}
+			currLevel++
+
+		}
+		if currLevel == 0 {
+			//fmt.Printf("coin is heads, node with key %d remains at level %d\n", nd.key, currLevel)
+			sl.globalNext[currLevel].next[currLevel] = nd
+			sl.globalNext[currLevel] = nd
+			nd.maxLevel = 0
+		}
+		//fmt.Println()
+	}
+
+	//logger.Println("-----------------------------------")
+
+	sl.Sentinel.maxLevel = sl.maxLevel
+
 }

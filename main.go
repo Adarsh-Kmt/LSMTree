@@ -42,7 +42,8 @@ func main() {
 		// 26: "z",
 	}
 
-	sl := skiplist.SkipListInit(kv)
+	sl := skiplist.SkipListInit(16)
+	sl.SetupSkipList(kv)
 
 	sl.DisplaySkipList()
 	logger.Println()
@@ -63,7 +64,19 @@ func main() {
 	sl.InsertItem(0, "o")
 	sl.InsertItem(7, "o")
 	sl.InsertItem(15, "o")
+	sl.DeleteItem(4)
+	// logger.Println()
+	// sl.DisplaySkipList()
+	// sl.DeleteItem(15)
+	// logger.Println()
+	// sl.DisplaySkipList()
+	// sl.DeleteItem(8)
 
+	if value, found := sl.SearchItem(4); !found {
+		logger.Println("not found")
+	} else {
+		logger.Printf("value %s found", value)
+	}
 	logger.Println()
 	sl.DisplaySkipList()
 }
