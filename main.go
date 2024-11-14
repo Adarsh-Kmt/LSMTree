@@ -4,79 +4,62 @@ import (
 	"log"
 	"os"
 
-	skiplist "github.com/Adarsh-Kmt/LSMTree/skiplist"
+	"github.com/Adarsh-Kmt/LSMTree/lsmtree"
 )
 
 var (
 	logger = log.New(os.Stdout, "LSMTREE >> ", 0)
 )
 
+// func main() {
+// 	sl := memtable.SkipListInit(16)
+
+// 	sl.SetupSkipList()
+
+// 	sst, err := sstable.SSTableInit(sl)
+
+// 	if err != nil {
+// 		logger.Println(err.Error())
+// 	}
+
+// 	//err = sst.ReadSSTTable()
+
+// 	if err != nil {
+// 		logger.Println(err.Error())
+// 	}
+
+// 	if value, err := sst.Get(10); err != nil {
+// 		logger.Printf("did not find key")
+// 	} else {
+// 		logger.Printf("found key with value %s", value)
+// 	}
+
+// }
+
 func main() {
 
-	kv := map[int]string{
-		1: "a",
-		2: "b",
-		3: "c",
-		4: "d",
-		5: "e",
-		6: "f",
-		//7:  "g",
-		8:  "h",
-		9:  "i",
-		10: "j",
-		// 11: "k",
-		// 12: "l",
-		// 13: "m",
-		// 14: "n",
-		// 15: "o",
-		// 16: "p",
-		// 17: "q",
-		// 18: "r",
-		// 19: "s",
-		// 20: "t",
-		// 21: "u",
-		// 22: "v",
-		// 23: "w",
-		// 24: "x",
-		// 25: "y",
-		// 26: "z",
+	lsm := lsmtree.LSMTreeInit(1)
+
+	keys := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
+	values := []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
+
+	for i := range values {
+
+		if err := lsm.Put(keys[i], values[i]); err != nil {
+			logger.Printf("error : %s", err.Error())
+			return
+		}
+
 	}
 
-	sl := skiplist.SkipListInit(16)
-	sl.SetupSkipList(kv)
+	testKeys := []int{1, 4, 5, 27, 23, 29, 26, 25, 30}
 
-	sl.DisplaySkipList()
-	logger.Println()
-	// value, found := sl.SearchItem(14)
-	// if found {
-	// 	logger.Printf("found key %d with value %s.", 14, value)
-	// } else {
-	// 	logger.Printf("did not find the key.")
-	// }
-	// logger.Println()
-	// value, found = sl.SearchItem(8)
-	// if found {
-	// 	logger.Printf("found key %d with value %s.", 8, value)
-	// } else {
-	// 	logger.Printf("did not find the key.")
-	// }
+	for i := range testKeys {
 
-	sl.InsertItem(0, "o")
-	sl.InsertItem(7, "o")
-	sl.InsertItem(15, "o")
-	sl.DeleteItem(4)
-	// logger.Println()
-	// sl.DisplaySkipList()
-	// sl.DeleteItem(15)
-	// logger.Println()
-	// sl.DisplaySkipList()
-	// sl.DeleteItem(8)
-
-	if value, found := sl.SearchItem(4); !found {
-		logger.Println("not found")
-	} else {
-		logger.Printf("value %s found", value)
+		if value, found := lsm.Get(testKeys[i]); found {
+			logger.Printf("found value %s for key %d", value, testKeys[i])
+		} else {
+			logger.Printf("didnt find a value for key %d", testKeys[i])
+		}
 	}
-	logger.Println()
-	sl.DisplaySkipList()
 }
