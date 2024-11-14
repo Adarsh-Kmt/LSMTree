@@ -84,7 +84,7 @@ func (sl *SkipList) DisplaySkipList() {
 	logger.Println("-------- DISPLAY SKIP LIST --------")
 	fmt.Printf("SkipList max level %d : \n", sl.maxLevel)
 	for currNode != nil {
-		fmt.Printf("key : %d value : %s  tombstone : %t maximum level reached : %d\n", currNode.key, currNode.value, currNode.tombStoneActivated, currNode.maxLevel)
+		fmt.Printf("key : %d value : %s maximum level reached : %d\n", currNode.key, currNode.value, currNode.maxLevel)
 		currNode = currNode.next[0]
 	}
 	logger.Println("-----------------------------------")

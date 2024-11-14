@@ -17,18 +17,17 @@ var (
 type MEMTable interface {
 	Put(key int, value string)
 	Get(key int) (value string, found bool)
-	Delete(key int) (value string, err error)
+	Delete(key int)
 	GetAllItems() (keys []int, values []string)
 	GetMinKey() (key int)
 	GetMaxKey() (key int)
 }
 
 type Node struct {
-	key                int
-	value              string
-	next               []*Node
-	maxLevel           int
-	tombStoneActivated bool
+	key      int
+	value    string
+	next     []*Node
+	maxLevel int
 }
 
 type SkipList struct {
@@ -51,10 +50,9 @@ func isHead() bool {
 func SkipListInit(numberOfLevels int) *SkipList {
 
 	sentinel := &Node{
-		key:                math.MinInt,
-		value:              "sentinel",
-		tombStoneActivated: false,
-		next:               make([]*Node, numberOfLevels),
+		key:   math.MinInt,
+		value: "sentinel",
+		next:  make([]*Node, numberOfLevels),
 	}
 
 	sl := &SkipList{
@@ -83,10 +81,10 @@ func (sl *SkipList) Put(key int, value string) {
 	predecessors := sl.getPredecessors(key)
 
 	newNode := &Node{
-		key:                key,
-		value:              value,
-		next:               make([]*Node, sl.numberOfLevels),
-		tombStoneActivated: false}
+		key:   key,
+		value: value,
+		next:  make([]*Node, sl.numberOfLevels),
+	}
 
 	maxLevel := 0
 
@@ -141,9 +139,6 @@ func (sl *SkipList) Get(key int) (value string, found bool) {
 		//fmt.Printf("currently at node with key %d \n", currNode.key)
 		if currNode.key == key {
 
-			if currNode.tombStoneActivated {
-				return "", false
-			}
 			//logger.Println("-----------------------------------")
 			return currNode.value, true
 
@@ -166,17 +161,15 @@ func (sl *SkipList) Get(key int) (value string, found bool) {
 	return "", false
 }
 
-func (sl *SkipList) Delete(key int) (value string, err error) {
+func (sl *SkipList) Delete(key int) {
 
 	nd := sl.findItem(key)
 
 	if nd == nil {
-		return "", fmt.Errorf("node having key %d not found in skip list", key)
+		sl.Put(key, "tombstone")
+	} else {
+		nd.value = "tombstone"
 	}
-
-	nd.tombStoneActivated = true
-
-	return nd.value, nil
 
 }
 

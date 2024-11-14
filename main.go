@@ -52,7 +52,19 @@ func main() {
 
 	}
 
-	testKeys := []int{1, 4, 5, 27, 23, 29, 26, 25, 30}
+	testKeys := []int{5, 29, 26, 25}
+
+	// for i := range testKeys {
+
+	// 	if value, found := lsm.Get(testKeys[i]); found {
+	// 		logger.Printf("found value %s for key %d", value, testKeys[i])
+	// 	} else {
+	// 		logger.Printf("didnt find a value for key %d", testKeys[i])
+	// 	}
+	// }
+
+	lsm.Delete(5)
+	lsm.Delete(26)
 
 	for i := range testKeys {
 
@@ -62,4 +74,5 @@ func main() {
 			logger.Printf("didnt find a value for key %d", testKeys[i])
 		}
 	}
+
 }
