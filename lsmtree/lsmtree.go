@@ -34,6 +34,11 @@ func LSMTreeInit(numberOfSSTableLevels int) *LSMTree {
 func (lsmtree *LSMTree) Get(key int) (value string, found bool) {
 
 	if value, found = lsmtree.currMEMTable.Get(key); found {
+
+		if value == "tombstone" {
+			return "", false
+		}
+
 		return value, found
 	}
 
@@ -42,6 +47,11 @@ func (lsmtree *LSMTree) Get(key int) (value string, found bool) {
 		if key >= frozenMEMTable.MinKey && key <= frozenMEMTable.MaxKey {
 
 			if value, found = frozenMEMTable.Get(key); found {
+
+				if value == "tombstone" {
+					return "", false
+				}
+
 				return value, found
 			}
 		}
@@ -54,6 +64,10 @@ func (lsmtree *LSMTree) Get(key int) (value string, found bool) {
 			sstable := level.SSTables[i]
 			var err error
 			if value, err = sstable.Get(int64(key)); err == nil {
+
+				if value == "tombstone" {
+					return "", false
+				}
 				return value, true
 			}
 		}
@@ -64,6 +78,24 @@ func (lsmtree *LSMTree) Get(key int) (value string, found bool) {
 func (lsmtree *LSMTree) Put(key int, value string) (err error) {
 
 	lsmtree.currMEMTable.Put(key, value)
+	lsmtree.currMEMTable.DisplaySkipList()
+	if lsmtree.currMEMTable.Size >= 10 {
+
+		var sstable *sst.SSTable
+		if sstable, err = sst.SSTableInit(lsmtree.currMEMTable); err != nil {
+			return err
+		}
+		lsmtree.currMEMTable = memtable.SkipListInit(16)
+
+		lsmtree.SSTableLevels[0].SSTables = append(lsmtree.SSTableLevels[0].SSTables, *sstable)
+
+	}
+	return nil
+}
+
+func (lsmtree *LSMTree) Delete(key int) (err error) {
+
+	lsmtree.currMEMTable.Delete(key)
 	lsmtree.currMEMTable.DisplaySkipList()
 	if lsmtree.currMEMTable.Size >= 10 {
 
