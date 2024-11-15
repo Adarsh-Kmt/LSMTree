@@ -14,6 +14,3 @@ A LSM tree, implemented in Go.
 |  Data Block N   |
 |   Index Block   |
 | Meta Data Block |
-
-
-- Format of Header Block
