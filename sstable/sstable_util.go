@@ -46,7 +46,7 @@ func searchInDataBlock(key int64, dataBlock *proto_files.DataBlock) (value strin
 	}
 	return "", false
 }
-func MergeDataBlock(kv1 []proto_files.KeyValuePair, sequenceNumber1 int64, kv2 []proto_files.KeyValuePair, sequenceNumber2 int64) (result []proto_files.KeyValuePair) {
+func MergeDataBlock(kv1 []*proto_files.KeyValuePair, sequenceNumber1 int64, kv2 []*proto_files.KeyValuePair, sequenceNumber2 int64) (result []*proto_files.KeyValuePair) {
 
 	if kv2 == nil {
 		return kv1
@@ -56,7 +56,7 @@ func MergeDataBlock(kv1 []proto_files.KeyValuePair, sequenceNumber1 int64, kv2 [
 		return kv2
 	}
 
-	result = make([]proto_files.KeyValuePair, 0)
+	result = make([]*proto_files.KeyValuePair, 0)
 
 	x := 0
 	y := 0
@@ -64,39 +64,76 @@ func MergeDataBlock(kv1 []proto_files.KeyValuePair, sequenceNumber1 int64, kv2 [
 	for x < len(kv1) && y < len(kv2) {
 
 		if kv1[x].Value == "tombstone" {
+			logger.Printf("ignoring key value pair with key %d", kv1[x].Key)
 			x++
 			continue
 		}
 		if kv2[y].Value == "tombstone" {
+			logger.Printf("ignoring key value pair with key %d", kv2[y].Key)
 			y++
 			continue
 		}
 		if kv1[x].Key < kv2[y].Key {
 			if kv1[x].Value != "tombstone" {
-				result = append(result, proto_files.KeyValuePair{Key: kv1[x].Key, Value: kv1[x].Value})
+				result = append(result, &proto_files.KeyValuePair{Key: kv1[x].Key, Value: kv1[x].Value})
+
+			} else {
+				logger.Printf("ignoring key value pair with key %d", kv1[x].Key)
 			}
 			x++
 		} else if kv1[x].Key > kv2[y].Key {
 			if kv2[y].Value != "tombstone" {
-				result = append(result, proto_files.KeyValuePair{Key: kv2[y].Key, Value: kv2[y].Value})
+				result = append(result, &proto_files.KeyValuePair{Key: kv2[y].Key, Value: kv2[y].Value})
+
+			} else {
+				logger.Printf("ignoring key value pair with key %d", kv2[y].Key)
 			}
 			y++
 
 		} else {
 			if sequenceNumber1 > sequenceNumber2 {
+
 				if kv1[x].Value != "tombstone" {
-					result = append(result, proto_files.KeyValuePair{Key: kv1[x].Key, Value: kv1[x].Value})
+					result = append(result, &proto_files.KeyValuePair{Key: kv1[x].Key, Value: kv1[x].Value})
+
+				} else {
+					logger.Printf("ignoring key value pair with key %d", kv1[x].Key)
 				}
 				x++
 			} else {
 				if kv2[y].Value != "tombstone" {
-					result = append(result, proto_files.KeyValuePair{Key: kv2[y].Key, Value: kv2[y].Value})
+					result = append(result, &proto_files.KeyValuePair{Key: kv2[y].Key, Value: kv2[y].Value})
+
+				} else {
+					logger.Printf("ignoring key value pair with key %d", kv2[y].Key)
 				}
 				y++
 			}
 		}
 	}
 
+	for x < len(kv1) {
+		if kv1[x].Value != "tombstone" {
+			result = append(result, &proto_files.KeyValuePair{Key: kv1[x].Key, Value: kv1[x].Value})
+
+		} else {
+			logger.Printf("ignoring key value pair with key %d", kv1[x].Key)
+
+		}
+		x++
+	}
+
+	for y < len(kv2) {
+
+		if kv2[y].Value != "tombstone" {
+			result = append(result, &proto_files.KeyValuePair{Key: kv2[y].Key, Value: kv2[y].Value})
+
+		} else {
+			logger.Printf("ignoring key value pair with key %d", kv2[y].Key)
+
+		}
+		y++
+	}
 	return result
 
 }
