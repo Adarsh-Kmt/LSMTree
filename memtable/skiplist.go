@@ -7,6 +7,8 @@ import (
 	"math/rand"
 	"os"
 	"time"
+
+	"github.com/Adarsh-Kmt/LSMTree/proto_files"
 )
 
 var (
@@ -18,7 +20,7 @@ type MEMTable interface {
 	Put(key int, value string)
 	Get(key int) (value string, found bool)
 	Delete(key int)
-	GetAllItems() (keys []int, values []string)
+	GetAllItems() (kv []*proto_files.KeyValuePair)
 	GetMinKey() (key int)
 	GetMaxKey() (key int)
 }
@@ -173,21 +175,19 @@ func (sl *SkipList) Delete(key int) {
 
 }
 
-func (sl *SkipList) GetAllItems() (keys []int, values []string) {
+func (sl *SkipList) GetAllItems() (kv []*proto_files.KeyValuePair) {
 
-	keys = make([]int, 0)
-	values = make([]string, 0)
+	kv = make([]*proto_files.KeyValuePair, 0)
 
 	currNode := sl.Sentinel.next[0]
 
 	for currNode != nil {
 
-		keys = append(keys, currNode.key)
-		values = append(values, currNode.value)
+		kv = append(kv, &proto_files.KeyValuePair{Key: int64(currNode.key), Value: currNode.value})
 		currNode = currNode.next[0]
 	}
 
-	return keys, values
+	return kv
 }
 
 func (sl *SkipList) GetMaxKey() (key int) {
