@@ -6,50 +6,49 @@ import (
 	"log"
 	"os"
 
-	memtable "github.com/Adarsh-Kmt/LSMTree/memtable"
 	"github.com/Adarsh-Kmt/LSMTree/proto_files"
 	"github.com/willf/bloom"
 	"google.golang.org/protobuf/proto"
 )
 
 const (
-	sst_directory = "sst_files"
+	SST_Directory = "sst_files"
 )
 
 var (
 	logger     = log.New(os.Stdout, "LSMTREE >> ", 0)
-	sst_number = 1
+	SST_Number = 1
 )
 
-func SSTableInit(memTable memtable.MEMTable) (*SSTable, error) {
+func SSTableInit(kv []*proto_files.KeyValuePair, minKey int64, maxKey int64) (*SSTable, error) {
 
 	var err error
 	var dataBlockBytes []byte
 	var metaDataBlockBytes []byte
 	var indexBlockBytes []byte
 	sst := &SSTable{
-		fileName:    fmt.Sprintf("sst_%d.dat", sst_number),
-		bloomFilter: bloom.New(10, 10),
+		FileName:    fmt.Sprintf("sst_%d.dat", SST_Number),
+		BloomFilter: bloom.New(10, 10),
 	}
 
-	f, err := os.Create(fmt.Sprintf("%s/%s", sst_directory, sst.fileName))
+	f, err := os.Create(fmt.Sprintf("%s/%s", SST_Directory, sst.FileName))
 
 	if err != nil {
 		return nil, err
 	}
 
-	sst_number++
+	SST_Number++
 	defer f.Close()
 
-	if dataBlockBytes, indexBlockBytes, err = CreateDataBlockAndIndexBlockBytes(memTable.GetAllItems()); err != nil {
+	if dataBlockBytes, indexBlockBytes, err = CreateDataBlockAndIndexBlockBytes(kv); err != nil {
 		return nil, err
 	}
 
-	if metaDataBlockBytes, err = CreateMetaDataBytes(memTable.GetMinKey(), memTable.GetMaxKey()); err != nil {
+	if metaDataBlockBytes, err = CreateMetaDataBytes(minKey, maxKey); err != nil {
 		return nil, err
 	}
 
-	if err = sst.WriteHeaderBlock(f, len(dataBlockBytes), len(indexBlockBytes)); err != nil {
+	if err = WriteHeaderBlock(f, len(dataBlockBytes), len(indexBlockBytes)); err != nil {
 		return nil, err
 	}
 	logger.Printf("wrote %d bytes to header block...", 24)
@@ -73,7 +72,7 @@ func SSTableInit(memTable memtable.MEMTable) (*SSTable, error) {
 	return sst, nil
 }
 
-func (sst *SSTable) WriteHeaderBlock(f *os.File, dataBlockSize int, indexBlockSize int) error {
+func WriteHeaderBlock(f *os.File, dataBlockSize int, indexBlockSize int) error {
 
 	header := &SSTableHeader{
 		DataBlockOffset:     int64(24),
@@ -86,7 +85,7 @@ func (sst *SSTable) WriteHeaderBlock(f *os.File, dataBlockSize int, indexBlockSi
 	return err
 }
 
-func CreateDataBlockAndIndexBlockBytes(keys []int, values []string) (dataBlockBytes []byte, indexBlockBytes []byte, err error) {
+func CreateDataBlockAndIndexBlockBytes(kv []*proto_files.KeyValuePair) (dataBlockBytes []byte, indexBlockBytes []byte, err error) {
 
 	dataBlockBytes = make([]byte, 0)
 
@@ -94,34 +93,28 @@ func CreateDataBlockAndIndexBlockBytes(keys []int, values []string) (dataBlockBy
 	Index := make([]*proto_files.IndexEntry, 0)
 	dataBlockOffset := 0
 
-	for i := 0; i < len(keys); i += 5 {
+	for i := 0; i < len(kv); i += 5 {
 
 		dbIndex := proto_files.IndexEntry{Offset: int64(dataBlockOffset)}
 
-		kv := make([]*proto_files.KeyValuePair, 0)
-		for j := i; j < i+5 && j < len(keys); j++ {
+		currkv := make([]*proto_files.KeyValuePair, 0)
+		for j := i; j < i+5 && j < len(kv); j++ {
 
 			if j == i {
-				dbIndex.MinKey = int64(keys[j])
+				dbIndex.MinKey = int64(kv[j].Key)
 			}
-			kv = append(kv, &proto_files.KeyValuePair{Key: int64(keys[j]), Value: values[j]})
+			currkv = append(currkv, kv[j])
 		}
 
-		if dbBytes, err := proto.Marshal(&proto_files.DataBlock{Data: kv}); err != nil {
+		if dbBytes, err := proto.Marshal(&proto_files.DataBlock{Data: currkv}); err != nil {
 			return nil, nil, err
 
 		} else {
 			dataBlockOffset += len(dbBytes)
 			dataBlockBytes = append(dataBlockBytes, dbBytes...)
-			logger.Printf("data block %v with size %d", kv, len(dbBytes))
+			logger.Printf("data block %v with size %d", currkv, len(dbBytes))
 		}
 
-		// if dbIndexBytes, err := proto.Marshal(&dbIndex); err != nil {
-		// 	return nil, nil, err
-		// } else {
-		// 	indexBlockBytes = append(indexBlockBytes, dbIndexBytes...)
-		// 	logger.Printf("index block min key : %v offset : %d of size %d", dbIndex.MinKey, dbIndex.Offset, len(dbIndexBytes))
-		// }
 		logger.Printf("index block min key : %v offset : %d", dbIndex.MinKey, dbIndex.Offset)
 
 		Index = append(Index, &dbIndex)
@@ -136,40 +129,14 @@ func CreateDataBlockAndIndexBlockBytes(keys []int, values []string) (dataBlockBy
 	}
 
 }
-func CreateDataBlockBytes(memTable memtable.MEMTable) ([]byte, error) {
 
-	var dataBlockBytes []byte
-
-	var err error
-
-	keys, values := memTable.GetAllItems()
-
-	kv := make([]*proto_files.KeyValuePair, 0)
-
-	for index := range keys {
-		kv = append(kv, &proto_files.KeyValuePair{Key: int64(keys[index]), Value: values[index]})
-	}
-	dataBlock := &proto_files.DataBlock{
-		Data: kv,
-	}
-
-	dataBlockBytes, err = proto.Marshal(dataBlock)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return dataBlockBytes, nil
-
-}
-
-func CreateMetaDataBytes(minKey int, maxKey int) ([]byte, error) {
+func CreateMetaDataBytes(minKey int64, maxKey int64) ([]byte, error) {
 
 	var metaDataBytes []byte
 	var err error
 	md := &proto_files.MetaDataBlock{
-		MinKey: int64(minKey),
-		MaxKey: int64(maxKey),
+		MinKey: minKey,
+		MaxKey: maxKey,
 	}
 
 	if metaDataBytes, err = proto.Marshal(md); err != nil {
