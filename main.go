@@ -3,12 +3,45 @@ package main
 import (
 	"log"
 	"os"
+	"time"
 
 	"github.com/Adarsh-Kmt/LSMTree/lsmtree"
 )
 
 var (
 	logger = log.New(os.Stdout, "LSMTREE >> ", 0)
+	kv     = map[int]string{
+		1:  "a",
+		2:  "b",
+		3:  "c",
+		4:  "d",
+		5:  "e",
+		6:  "f",
+		7:  "g",
+		8:  "h",
+		9:  "i",
+		10: "j",
+		11: "k",
+		12: "l",
+		13: "m",
+		14: "n",
+		15: "o",
+		16: "p",
+		17: "q",
+		18: "r",
+		19: "s",
+		20: "t",
+		21: "u",
+		22: "v",
+		23: "w",
+		24: "x",
+		25: "y",
+		26: "z",
+		27: "aa",
+		28: "ab",
+		29: "ac",
+		30: "ad",
+	}
 )
 
 // func main() {
@@ -38,21 +71,24 @@ var (
 
 func main() {
 
-	lsm := lsmtree.LSMTreeInit(1)
+	lsm := lsmtree.LSMTreeInit(2)
 
-	keys := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
-	values := []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
+	for key, value := range kv {
 
-	for i := range values {
-
-		if err := lsm.Put(keys[i], values[i]); err != nil {
+		if err := lsm.Put(key, value); err != nil {
 			logger.Printf("error : %s", err.Error())
 			return
 		}
 
 	}
+	//scanner := bufio.NewReader(os.Stdin)
 
-	testKeys := []int{5, 29, 26, 25}
+	time.Sleep(1000 * time.Second)
+
+	// testKeys := []int{5, 29, 26, 25}
+
+	// lsm.Delete(5)
+	// lsm.Delete(26)
 
 	// for i := range testKeys {
 
@@ -62,17 +98,5 @@ func main() {
 	// 		logger.Printf("didnt find a value for key %d", testKeys[i])
 	// 	}
 	// }
-
-	lsm.Delete(5)
-	lsm.Delete(26)
-
-	for i := range testKeys {
-
-		if value, found := lsm.Get(testKeys[i]); found {
-			logger.Printf("found value %s for key %d", value, testKeys[i])
-		} else {
-			logger.Printf("didnt find a value for key %d", testKeys[i])
-		}
-	}
 
 }
