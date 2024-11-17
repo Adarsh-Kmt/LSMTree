@@ -10,43 +10,35 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-func (sst *SSTable) ReadSSTTable() error {
+func (sst *SSTable) ReadSSTTable() (kv []*proto_files.KeyValuePair, err error) {
 
-	var err error
 	var f *os.File
-	var header *SSTableHeader
+	var headerBlock *SSTableHeader
+	var indexBlock *proto_files.IndexBlock
 
-	f, err = os.Open(fmt.Sprintf("%s/%s", sst_directory, sst.fileName))
-
-	if err != nil {
-		return err
+	if f, err = os.Open(fmt.Sprintf("%s/%s", SST_Directory, sst.FileName)); err != nil {
+		return nil, err
 	}
 
 	defer f.Close()
 
-	header, err = ReadHeaderBlock(f)
-
-	if err != nil {
-		return err
+	if headerBlock, err = ReadHeaderBlock(f); err != nil {
+		return nil, err
 	}
 
-	_, err = ReadIndexBlock(f, header.IndexBlockOffset, header.MetaDataBlockOffset)
-	if err != nil {
-		return err
+	if indexBlock, err = ReadIndexBlock(f, headerBlock.IndexBlockOffset, headerBlock.MetaDataBlockOffset); err != nil {
+		return nil, err
 	}
 
-	_, err = ReadMetaDataBlock(f, header.MetaDataBlockOffset)
-
-	if err != nil {
-		return err
+	if _, err = ReadMetaDataBlock(f, headerBlock.MetaDataBlockOffset); err != nil {
+		return nil, err
 	}
 
-	_, err = ReadDataBlock(f, header.DataBlockOffset, header.MetaDataBlockOffset)
-
-	if err != nil {
-		return err
+	if kv, err = ReadAllDataPartitions(f, headerBlock, indexBlock); err != nil {
+		return nil, err
 	}
-	return nil
+
+	return kv, nil
 }
 
 func ReadHeaderBlock(f *os.File) (*SSTableHeader, error) {
@@ -95,7 +87,36 @@ func ReadIndexBlock(f *os.File, indexBlockOffset int64, metaDataBlockOffset int6
 	return &IndexBlock, nil
 }
 
-func ReadDataBlock(f *os.File, startOffset int64, endOffset int64) (*proto_files.DataBlock, error) {
+func ReadAllDataPartitions(f *os.File, headerBlock *SSTableHeader, indexBlock *proto_files.IndexBlock) (kv []*proto_files.KeyValuePair, err error) {
+
+	kv = make([]*proto_files.KeyValuePair, 0)
+
+	for i := 0; i < len(indexBlock.Index); i++ {
+
+		var dataBlock *proto_files.DataBlock
+
+		var startOffset int64
+		var endOffset int64
+		if i != len(indexBlock.Index)-1 {
+			startOffset = indexBlock.Index[i].Offset + headerBlock.DataBlockOffset
+			endOffset = indexBlock.Index[i+1].Offset + headerBlock.DataBlockOffset
+		} else {
+			startOffset = indexBlock.Index[i].Offset + headerBlock.DataBlockOffset
+			endOffset = headerBlock.IndexBlockOffset
+		}
+
+		if dataBlock, err = ReadDataPartition(f, startOffset, endOffset); err != nil {
+			return nil, err
+		}
+
+		kv = append(kv, dataBlock.Data...)
+
+	}
+
+	return kv, nil
+}
+
+func ReadDataPartition(f *os.File, startOffset int64, endOffset int64) (*proto_files.DataBlock, error) {
 
 	logger.Printf("starting to read data block from offset %d until offset %d", startOffset, endOffset)
 	f.Seek(startOffset, 0)
@@ -118,7 +139,6 @@ func ReadDataBlock(f *os.File, startOffset int64, endOffset int64) (*proto_files
 	return &DataBlock, nil
 
 }
-
 func ReadMetaDataBlock(f *os.File, metaDataBlockOffset int64) (*proto_files.MetaDataBlock, error) {
 
 	f.Seek(metaDataBlockOffset, 0)
