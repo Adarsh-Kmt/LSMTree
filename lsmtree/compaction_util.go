@@ -66,18 +66,8 @@ func (lsmtree *LSMTree) SizeTieredCompaction(levelNumber int) (err error) {
 
 	var mergedKV []*proto_files.KeyValuePair
 
-	for i := len(sstables) - 1; i >= 0; i-- {
-
-		var kv []*proto_files.KeyValuePair
-
-		sstable := sstables[i]
-
-		if kv, err = sstable.ReadSSTTable(); err != nil {
-			return err
-		}
-		mergedKV = sst.MergeDataBlock(kv, int64(i), mergedKV, math.MinInt64)
-		logger.Printf("merged KV : %v", mergedKV)
-
+	if mergedKV, err = LinearMerge(sstables); err != nil {
+		return err
 	}
 
 	if err = lsmtree.DeleteAllSSTablesInLevel(levelNumber); err != nil {
@@ -113,6 +103,24 @@ func (lsmtree *LSMTree) SizeTieredCompaction(levelNumber int) (err error) {
 
 }
 
+func LinearMerge(sstables []sst.SSTable) (mergedKV []*proto_files.KeyValuePair, err error) {
+
+	for i := len(sstables) - 1; i >= 0; i-- {
+
+		var kv []*proto_files.KeyValuePair
+
+		sstable := sstables[i]
+
+		if kv, err = sstable.ReadSSTTable(); err != nil {
+			return nil, err
+		}
+		mergedKV = sst.MergeDataBlock(kv, int64(i), mergedKV, math.MinInt64)
+		logger.Printf("merged KV : %v", mergedKV)
+
+	}
+
+	return mergedKV, nil
+}
 func (lsmtree *LSMTree) DeleteAllSSTablesInLevel(levelNumber int) error {
 
 	lsmtree.SSTableLevels[levelNumber].RWMutex.Lock()
