@@ -25,8 +25,6 @@ func (lsmtree *LSMTree) BackgroundCompaction() {
 			}
 		case index := <-lsmtree.compactLevelChannel:
 
-			logger.Printf("level %d has been sent for compaction...", index)
-
 			if err := lsmtree.SizeTieredCompaction(index); err != nil {
 
 				logger.Printf("error during compaction : %s", err.Error())
@@ -56,13 +54,29 @@ func (lsmtree *LSMTree) TriggerCompaction() (compactionTriggered bool) {
 
 func (lsmtree *LSMTree) SizeTieredCompaction(levelNumber int) (err error) {
 
+	logger.Println("///////////////////////////////////////////////")
+	logger.Println("/////////    COMPACTION PROCESS     ///////////")
+	logger.Println("///////////////////////////////////////////////")
+	logger.Println()
+	logger.Printf("level %d has been sent for compaction...", levelNumber)
+
 	if levelNumber == len(lsmtree.SSTableLevels)-1 {
 		logger.Println("cannot compact last level")
 		return nil
 	}
 	logger.Printf("number of ss tables in level %d are : %d", levelNumber, len(lsmtree.SSTableLevels[levelNumber].SSTables))
 
-	sstables := lsmtree.SSTableLevels[levelNumber].SSTables
+	sstables := make([]sst.SSTable, 0)
+	lsmtree.SSTableLevels[levelNumber].RWMutex.Lock()
+
+	if len(lsmtree.SSTableLevels[levelNumber].SSTables) < maxLevelMap[levelNumber] {
+		logger.Printf("level %d only has %d ss tables, so no need for compaction", levelNumber, len(lsmtree.SSTableLevels[levelNumber].SSTables))
+		lsmtree.SSTableLevels[levelNumber].RWMutex.Unlock()
+		return nil
+	}
+	sstables = append(sstables, lsmtree.SSTableLevels[levelNumber].SSTables...)
+
+	lsmtree.SSTableLevels[levelNumber].RWMutex.Unlock()
 
 	var mergedKV []*proto_files.KeyValuePair
 
@@ -83,8 +97,15 @@ func (lsmtree *LSMTree) SizeTieredCompaction(levelNumber int) (err error) {
 	lsmtree.SSTableLevels[levelNumber].RWMutex.Lock()
 	lsmtree.SSTableLevels[levelNumber+1].RWMutex.Lock()
 
-	lsmtree.SSTableLevels[levelNumber].SSTables = make([]sst.SSTable, 0)
+	newSSTables := make([]sst.SSTable, 0)
+	for i := 0; i < len(lsmtree.SSTableLevels[levelNumber].SSTables)-len(sstables); i++ {
+		newSSTables = append(newSSTables, lsmtree.SSTableLevels[levelNumber].SSTables[i])
+	}
+	lsmtree.SSTableLevels[levelNumber].SSTables = newSSTables
 	lsmtree.SSTableLevels[levelNumber+1].SSTables = append(lsmtree.SSTableLevels[levelNumber+1].SSTables, *mergedSST)
+	logger.Println()
+	logger.Printf("after compaction level %d now has %d sstables.. ", levelNumber+1, len(lsmtree.SSTableLevels[levelNumber+1].SSTables))
+	logger.Println()
 
 	lsmtree.SSTableLevels[levelNumber].RWMutex.Unlock()
 	lsmtree.SSTableLevels[levelNumber+1].RWMutex.Unlock()
@@ -98,7 +119,11 @@ func (lsmtree *LSMTree) SizeTieredCompaction(levelNumber int) (err error) {
 	if _, err = mergedSST.ReadSSTTable(); err != nil {
 		return err
 	}
-
+	logger.Println()
+	logger.Println("///////////////////////////////////////////////")
+	logger.Println("/////////    COMPACTION PROCESS     ///////////")
+	logger.Println("///////////////////////////////////////////////")
+	logger.Println()
 	return nil
 
 }
