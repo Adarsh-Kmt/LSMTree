@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"sync"
+	"time"
 
 	memtable "github.com/Adarsh-Kmt/LSMTree/memtable"
 	sst "github.com/Adarsh-Kmt/LSMTree/sstable"
@@ -17,6 +18,8 @@ var (
 		2: 8,
 		3: 16,
 	}
+	///logFile, _ = os.OpenFile("log_file.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+
 	logger = log.New(os.Stdout, "LSMTREE >> ", 0)
 )
 
@@ -132,9 +135,13 @@ func (lsmtree *LSMTree) Put(key int, value string) (err error) {
 
 		lsmtree.SSTableLevels[0].RWMutex.Lock()
 		lsmtree.SSTableLevels[0].SSTables = append(lsmtree.SSTableLevels[0].SSTables, *sstable)
+		logger.Println()
+		logger.Printf("level %d now has %d sstables...", 0, len(lsmtree.SSTableLevels[0].SSTables))
+		logger.Println()
 		lsmtree.SSTableLevels[0].RWMutex.Unlock()
 
 		if len(lsmtree.SSTableLevels[0].SSTables) > maxLevelMap[0] {
+			logger.Println("pushing level 0 to compaction queue")
 			lsmtree.compactLevelChannel <- 0
 		}
 	}
@@ -158,12 +165,28 @@ func (lsmtree *LSMTree) Delete(key int) (err error) {
 
 		lsmtree.SSTableLevels[0].RWMutex.Lock()
 		lsmtree.SSTableLevels[0].SSTables = append(lsmtree.SSTableLevels[0].SSTables, *sstable)
+		logger.Println()
+		logger.Printf("level %d now has %d sstables...", 0, len(lsmtree.SSTableLevels[0].SSTables))
+		logger.Println()
 		lsmtree.SSTableLevels[0].RWMutex.Unlock()
 
 		if len(lsmtree.SSTableLevels[0].SSTables) > maxLevelMap[0] {
+			logger.Println("pushing level 0 to compaction queue")
 			lsmtree.compactLevelChannel <- 0
 		}
 
 	}
 	return nil
+}
+
+func (lsmtree *LSMTree) LSMTreeSetup(kv map[int]string) {
+	for key, value := range kv {
+
+		if err := lsmtree.Put(key, value); err != nil {
+			logger.Printf("error : %s", err.Error())
+			return
+		}
+		time.Sleep(500 * time.Millisecond)
+	}
+	logger.Println("setup complete")
 }

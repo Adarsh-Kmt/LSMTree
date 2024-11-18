@@ -12,7 +12,8 @@ import (
 )
 
 var (
-	coin   = rand.New(rand.NewSource(time.Now().UnixNano()))
+	coin = rand.New(rand.NewSource(time.Now().UnixNano()))
+	//logFile, _ = os.OpenFile("log_file.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	logger = log.New(os.Stdout, "LSMTREE >> ", 0)
 )
 
