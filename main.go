@@ -1,14 +1,79 @@
 package main
 
 import (
+	"bufio"
 	"log"
 	"os"
+	"strconv"
+	"strings"
 
 	"github.com/Adarsh-Kmt/LSMTree/lsmtree"
 )
 
 var (
 	logger = log.New(os.Stdout, "LSMTREE >> ", 0)
+	kv     = map[int]string{
+		1:  "a",
+		2:  "b",
+		3:  "c",
+		4:  "d",
+		5:  "e",
+		6:  "f",
+		7:  "g",
+		8:  "h",
+		9:  "i",
+		10: "j",
+		11: "k",
+		12: "l",
+		13: "m",
+		14: "n",
+		15: "o",
+		16: "p",
+		17: "q",
+		18: "r",
+		19: "s",
+		20: "t",
+		21: "u",
+		22: "v",
+		23: "w",
+		24: "x",
+		25: "y",
+		26: "z",
+		27: "aa",
+		28: "ab",
+		29: "ac",
+		30: "ad",
+		31: "a",
+		32: "b",
+		33: "c",
+		34: "d",
+		35: "e",
+		36: "f",
+		37: "g",
+		38: "h",
+		39: "i",
+		40: "j",
+		41: "k",
+		42: "l",
+		43: "m",
+		44: "n",
+		45: "o",
+		46: "p",
+		47: "q",
+		48: "r",
+		49: "s",
+		50: "t",
+		51: "u",
+		52: "v",
+		53: "w",
+		54: "x",
+		55: "y",
+		56: "z",
+		57: "aa",
+		58: "ab",
+		59: "ac",
+		60: "ad",
+	}
 )
 
 // func main() {
@@ -38,41 +103,82 @@ var (
 
 func main() {
 
-	lsm := lsmtree.LSMTreeInit(1)
+	lsmtree := lsmtree.LSMTreeInit(3)
 
-	keys := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26}
-	values := []string{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}
+	lsmtree.LSMTreeSetup(kv)
 
-	for i := range values {
+	getInput(lsmtree)
 
-		if err := lsm.Put(keys[i], values[i]); err != nil {
-			logger.Printf("error : %s", err.Error())
+}
+
+func getInput(lsmtree *lsmtree.LSMTree) {
+
+	scanner := bufio.NewReader(os.Stdin)
+
+	for {
+		logger.Print("enter input: ")
+		input, err := scanner.ReadString('\n')
+		input = strings.TrimRight(input, "\r\n")
+		if err != nil {
+			return
+		}
+		if input == "exit" {
+			logger.Println("exiting...")
 			return
 		}
 
-	}
+		logger.Print("1) enter 'insert' to insert item    \n2) enter 'search' to search for item    \n3) enter 'delete' to delete an item \n5) enter 'exit' to exit")
 
-	testKeys := []int{5, 29, 26, 25}
+		option, err := scanner.ReadString('\n')
+		if err != nil {
+			continue
+		}
+		option = strings.TrimRight(option, "\r\n")
 
-	// for i := range testKeys {
+		if option == "exit" {
+			return
+		}
 
-	// 	if value, found := lsm.Get(testKeys[i]); found {
-	// 		logger.Printf("found value %s for key %d", value, testKeys[i])
-	// 	} else {
-	// 		logger.Printf("didnt find a value for key %d", testKeys[i])
-	// 	}
-	// }
+		logger.Print("enter key : ")
+		keystr, err := scanner.ReadString('\n')
+		if err != nil {
+			return
+		}
+		keystr = strings.TrimRight(keystr, "\r\n")
+		key, err := strconv.Atoi(keystr)
 
-	lsm.Delete(5)
-	lsm.Delete(26)
+		if err != nil {
+			return
+		}
 
-	for i := range testKeys {
+		if option == "insert" {
 
-		if value, found := lsm.Get(testKeys[i]); found {
-			logger.Printf("found value %s for key %d", value, testKeys[i])
-		} else {
-			logger.Printf("didnt find a value for key %d", testKeys[i])
+			logger.Print("enter value : ")
+			value, err := scanner.ReadString('\n')
+			value = strings.TrimRight(value, "\r\n")
+			if err != nil {
+				return
+			}
+			lsmtree.Put(key, value)
+
+		} else if option == "search" {
+
+			value, found := lsmtree.Get(key)
+			if found {
+				logger.Printf("value for key %d = %s", key, value)
+			} else {
+				logger.Printf("key %d not found in btree.", key)
+			}
+		} else if option == "delete" {
+
+			err := lsmtree.Delete(key)
+
+			if err != nil {
+				logger.Printf(err.Error())
+			} else {
+				logger.Printf("key %d was deleted", key)
+
+			}
 		}
 	}
-
 }

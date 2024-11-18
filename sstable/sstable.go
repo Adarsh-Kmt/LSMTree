@@ -3,12 +3,14 @@ package sstable
 import (
 	"fmt"
 	"os"
+	"sync"
 
 	"github.com/Adarsh-Kmt/LSMTree/proto_files"
 	"github.com/willf/bloom"
 )
 
 type SSTableLevel struct {
+	RWMutex             *sync.RWMutex
 	LevelNumber         int
 	NumberOfSSTables    int
 	SSTables            []SSTable
@@ -16,8 +18,8 @@ type SSTableLevel struct {
 }
 
 type SSTable struct {
-	fileName    string
-	bloomFilter *bloom.BloomFilter
+	FileName    string
+	BloomFilter *bloom.BloomFilter
 }
 
 type SSTableHeader struct {
@@ -38,7 +40,7 @@ func (sst *SSTable) Get(key int64) (value string, err error) {
 
 	var index int
 
-	if f, err = os.Open(fmt.Sprintf("%s/%s", sst_directory, sst.fileName)); err != nil {
+	if f, err = os.Open(fmt.Sprintf("%s/%s", SST_Directory, sst.FileName)); err != nil {
 		return "", fmt.Errorf("error while opening sst file")
 	}
 
@@ -71,7 +73,7 @@ func (sst *SSTable) Get(key int64) (value string, err error) {
 		endOffset = headerBlock.DataBlockOffset + indexBlock.Index[index+1].Offset
 	}
 
-	dataBlock, err := ReadDataBlock(f, startOffset, endOffset)
+	dataBlock, err := ReadDataPartition(f, startOffset, endOffset)
 
 	//logger.Printf("length of data partition : %d", len(dataBlock.Data))
 	if err != nil {

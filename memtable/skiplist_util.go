@@ -1,7 +1,6 @@
 package memtable
 
 import (
-	"fmt"
 	"slices"
 )
 
@@ -82,9 +81,9 @@ func (sl *SkipList) DisplaySkipList() {
 	currNode := sl.Sentinel
 
 	logger.Println("-------- DISPLAY SKIP LIST --------")
-	fmt.Printf("SkipList max level %d : \n", sl.maxLevel)
+	logger.Printf("SkipList max level %d : \n", sl.maxLevel)
 	for currNode != nil {
-		fmt.Printf("key : %d value : %s maximum level reached : %d\n", currNode.key, currNode.value, currNode.maxLevel)
+		logger.Printf("key : %d value : %s maximum level reached : %d\n", currNode.key, currNode.value, currNode.maxLevel)
 		currNode = currNode.next[0]
 	}
 	logger.Println("-----------------------------------")
