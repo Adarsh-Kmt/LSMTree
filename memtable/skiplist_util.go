@@ -80,18 +80,18 @@ func (sl *SkipList) displaySkipList() {
 
 	currNode := sl.Sentinel
 
-	logger.Println("-------- DISPLAY SKIP LIST --------")
-	logger.Printf("SkipList max level %d : \n", sl.maxLevel)
+	skiplistLogger.Println("-------- DISPLAY SKIP LIST --------")
+	skiplistLogger.Printf("SkipList max level %d : \n", sl.maxLevel)
 	for currNode != nil {
-		logger.Printf("key : %d value : %s maximum level reached : %d\n", currNode.key, currNode.value, currNode.maxLevel)
+		skiplistLogger.Printf("key : %d value : %s maximum level reached : %d\n", currNode.key, currNode.value, currNode.maxLevel)
 		currNode = currNode.next[0]
 	}
-	logger.Println("-----------------------------------")
+	skiplistLogger.Println("-----------------------------------")
 }
 
 func (sl *SkipList) findItem(key int) (nd *Node) {
 
-	//logger.Println("-------- SEARCH SKIP LIST --------")
+	//skiplistLogger.Println("-------- SEARCH SKIP LIST --------")
 
 	currNode := sl.Sentinel
 
@@ -99,7 +99,7 @@ func (sl *SkipList) findItem(key int) (nd *Node) {
 
 		//fmt.Printf("currently at node with key %d \n", currNode.key)
 		if currNode.key == key {
-			//logger.Println("-----------------------------------")
+			//skiplistLogger.Println("-----------------------------------")
 			return currNode
 
 		}
@@ -116,7 +116,7 @@ func (sl *SkipList) findItem(key int) (nd *Node) {
 		//fmt.Println()
 	}
 
-	//logger.Println("-----------------------------------")
+	//skiplistLogger.Println("-----------------------------------")
 
 	return nil
 }

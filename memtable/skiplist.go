@@ -12,9 +12,9 @@ import (
 )
 
 var (
-	coin = rand.New(rand.NewSource(time.Now().UnixNano()))
-	//logFile, _ = os.OpenFile("log_file.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	logger = log.New(os.Stdout, "LSMTREE >> ", 0)
+	coin               = rand.New(rand.NewSource(time.Now().UnixNano()))
+	skiplistlogFile, _ = os.OpenFile("log_files/skiplist_log.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	skiplistLogger     = log.New(skiplistlogFile, "LSMTREE >> ", 0)
 )
 
 type MEMTable interface {
@@ -135,7 +135,7 @@ func (sl *SkipList) Put(key int, value string) {
 
 func (sl *SkipList) Get(key int) (value string, found bool) {
 
-	//logger.Println("-------- SEARCH SKIP LIST --------")
+	//skiplistLogger.Println("-------- SEARCH SKIP LIST --------")
 
 	currNode := sl.Sentinel
 
@@ -144,7 +144,7 @@ func (sl *SkipList) Get(key int) (value string, found bool) {
 		//fmt.Printf("currently at node with key %d \n", currNode.key)
 		if currNode.key == key {
 
-			//logger.Println("-----------------------------------")
+			//skiplistLogger.Println("-----------------------------------")
 			return currNode.value, true
 
 		}
@@ -161,7 +161,7 @@ func (sl *SkipList) Get(key int) (value string, found bool) {
 		fmt.Println()
 	}
 
-	//logger.Println("-----------------------------------")
+	//skiplistLogger.Println("-----------------------------------")
 
 	return "", false
 }
