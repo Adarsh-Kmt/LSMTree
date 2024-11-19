@@ -4,18 +4,24 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/Adarsh-Kmt/LSMTree/proto_files"
 	"google.golang.org/protobuf/proto"
 )
 
+var (
+	readLogFile, _ = os.OpenFile("log_files/read_log.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	readLogger     = log.New(readLogFile, "LSMTREE >> ", 0)
+)
+
 func (sst *SSTable) ReadSSTTable() (kv []*proto_files.KeyValuePair, err error) {
 
-	logger.Println("///////////////////////////////////////////////")
-	logger.Println("/////////        READ PROCESS        /////////")
-	logger.Println("///////////////////////////////////////////////")
-	logger.Println()
+	readLogger.Println("///////////////////////////////////////////////")
+	readLogger.Println("/////////        READ PROCESS        /////////")
+	readLogger.Println("///////////////////////////////////////////////")
+	readLogger.Println()
 	var f *os.File
 	var headerBlock *SSTableHeader
 	var indexBlock *proto_files.IndexBlock
@@ -41,11 +47,11 @@ func (sst *SSTable) ReadSSTTable() (kv []*proto_files.KeyValuePair, err error) {
 	if kv, err = ReadAllDataPartitions(f, headerBlock, indexBlock); err != nil {
 		return nil, err
 	}
-	logger.Println()
-	logger.Println("///////////////////////////////////////////////")
-	logger.Println("/////////        READ PROCESS        /////////")
-	logger.Println("///////////////////////////////////////////////")
-	logger.Println()
+	readLogger.Println()
+	readLogger.Println("///////////////////////////////////////////////")
+	readLogger.Println("/////////        READ PROCESS        /////////")
+	readLogger.Println("///////////////////////////////////////////////")
+	readLogger.Println()
 	return kv, nil
 }
 
@@ -56,12 +62,12 @@ func ReadHeaderBlock(f *os.File) (*SSTableHeader, error) {
 
 	var n int
 	var err error
-	logger.Println("------ HEADER BLOCK -------")
-	logger.Println()
+	readLogger.Println("------ HEADER BLOCK -------")
+	readLogger.Println()
 	if n, err = f.Read(headerBytes); err != nil {
 		return nil, err
 	} else {
-		logger.Printf("read %d bytes of header data...", n)
+		readLogger.Printf("read %d bytes of header data...", n)
 	}
 
 	var header SSTableHeader
@@ -70,19 +76,19 @@ func ReadHeaderBlock(f *os.File) (*SSTableHeader, error) {
 		return nil, err
 	}
 
-	logger.Printf("header block => data block offset : %d, index block offset : %d meta data block offset : %d", header.DataBlockOffset, header.IndexBlockOffset, header.MetaDataBlockOffset)
-	logger.Println()
-	logger.Println("------ HEADER BLOCK -------")
-	logger.Println()
+	readLogger.Printf("header block => data block offset : %d, index block offset : %d meta data block offset : %d", header.DataBlockOffset, header.IndexBlockOffset, header.MetaDataBlockOffset)
+	readLogger.Println()
+	readLogger.Println("------ HEADER BLOCK -------")
+	readLogger.Println()
 	return &header, nil
 }
 
 func ReadIndexBlock(f *os.File, indexBlockOffset int64, metaDataBlockOffset int64) (*proto_files.IndexBlock, error) {
 
 	f.Seek(indexBlockOffset, 0)
-	logger.Println("------ INDEX BLOCK -------")
-	logger.Println()
-	logger.Printf("reading index block from file, starting at index %d, with size %d", indexBlockOffset, metaDataBlockOffset-indexBlockOffset)
+	readLogger.Println("------ INDEX BLOCK -------")
+	readLogger.Println()
+	readLogger.Printf("reading index block from file, starting at index %d, with size %d", indexBlockOffset, metaDataBlockOffset-indexBlockOffset)
 
 	indexBlockBytes := make([]byte, metaDataBlockOffset-indexBlockOffset)
 
@@ -93,14 +99,14 @@ func ReadIndexBlock(f *os.File, indexBlockOffset int64, metaDataBlockOffset int6
 	if err := proto.Unmarshal(indexBlockBytes, &IndexBlock); err != nil {
 		return nil, err
 	}
-	logger.Printf("length of index block %d", len(IndexBlock.Index))
-	logger.Println()
+	readLogger.Printf("length of index block %d", len(IndexBlock.Index))
+	readLogger.Println()
 	for _, dataBlockIndex := range IndexBlock.Index {
-		logger.Printf("min key %d offset %d ", dataBlockIndex.MinKey, dataBlockIndex.Offset)
+		readLogger.Printf("min key %d offset %d ", dataBlockIndex.MinKey, dataBlockIndex.Offset)
 	}
-	logger.Println()
-	logger.Println("------ INDEX BLOCK -------")
-	logger.Println()
+	readLogger.Println()
+	readLogger.Println("------ INDEX BLOCK -------")
+	readLogger.Println()
 
 	return &IndexBlock, nil
 }
@@ -136,10 +142,10 @@ func ReadAllDataPartitions(f *os.File, headerBlock *SSTableHeader, indexBlock *p
 
 func ReadDataPartition(f *os.File, startOffset int64, endOffset int64) (*proto_files.DataBlock, error) {
 
-	logger.Println("------ DATA PARTITION -------")
-	logger.Println()
-	logger.Printf("starting to read data block from offset %d until offset %d", startOffset, endOffset)
-	logger.Println()
+	readLogger.Println("------ DATA PARTITION -------")
+	readLogger.Println()
+	readLogger.Printf("starting to read data block from offset %d until offset %d", startOffset, endOffset)
+	readLogger.Println()
 	f.Seek(startOffset, 0)
 
 	dataBlockBytes := make([]byte, endOffset-startOffset)
@@ -154,11 +160,11 @@ func ReadDataPartition(f *os.File, startOffset int64, endOffset int64) (*proto_f
 
 	for index := range DataBlock.Data {
 
-		logger.Printf("key : %d value %s", DataBlock.Data[index].Key, DataBlock.Data[index].Value)
+		readLogger.Printf("key : %d value %s", DataBlock.Data[index].Key, DataBlock.Data[index].Value)
 	}
-	logger.Println()
-	logger.Println("------ DATA PARTITION -------")
-	logger.Println()
+	readLogger.Println()
+	readLogger.Println("------ DATA PARTITION -------")
+	readLogger.Println()
 	return &DataBlock, nil
 
 }
@@ -166,10 +172,10 @@ func ReadMetaDataBlock(f *os.File, metaDataBlockOffset int64) (*proto_files.Meta
 
 	f.Seek(metaDataBlockOffset, 0)
 
-	logger.Println("------ META DATA BLOCK -------")
-	logger.Println()
-	logger.Printf("reading meta data block...")
-	logger.Println()
+	readLogger.Println("------ META DATA BLOCK -------")
+	readLogger.Println()
+	readLogger.Printf("reading meta data block...")
+	readLogger.Println()
 
 	fileInfo, err := f.Stat()
 	if err != nil {
@@ -185,10 +191,10 @@ func ReadMetaDataBlock(f *os.File, metaDataBlockOffset int64) (*proto_files.Meta
 		return nil, err
 	}
 
-	logger.Printf("min key : %d max key : %d ", metaDataBlock.MinKey, metaDataBlock.MaxKey)
-	logger.Println()
-	logger.Println("------ META DATA BLOCK -------")
-	logger.Println()
+	readLogger.Printf("min key : %d max key : %d ", metaDataBlock.MinKey, metaDataBlock.MaxKey)
+	readLogger.Println()
+	readLogger.Println("------ META DATA BLOCK -------")
+	readLogger.Println()
 
 	return &metaDataBlock, nil
 

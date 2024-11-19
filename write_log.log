@@ -1,0 +1,772 @@
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:2  value:"b" key:17  value:"q" key:24  value:"x" key:28  value:"ab" key:32  value:"b"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:2  value:"b" key:17  value:"q" key:24  value:"x" key:28  value:"ab" key:32  value:"b"] with size 36
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:33  value:"c" key:44  value:"n" key:45  value:"o" key:50  value:"t" key:60  value:"ad"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:33  value:"c" key:44  value:"n" key:45  value:"o" key:50  value:"t" key:60  value:"ad"] with size 36
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> index block min key : 2 offset : 0
+LSMTREE >> index block min key : 33 offset : 36
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> meta data block => MinKey:2  MaxKey:60
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> wrote 24 bytes to header block...
+LSMTREE >> 
+LSMTREE >> header block => &{24 96 106}
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:14  value:"n" key:19  value:"s" key:36  value:"f" key:43  value:"m" key:46  value:"p"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:14  value:"n" key:19  value:"s" key:36  value:"f" key:43  value:"m" key:46  value:"p"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:48  value:"r" key:52  value:"v" key:54  value:"x" key:55  value:"y" key:57  value:"aa"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:48  value:"r" key:52  value:"v" key:54  value:"x" key:55  value:"y" key:57  value:"aa"] with size 36
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> index block min key : 14 offset : 0
+LSMTREE >> index block min key : 48 offset : 35
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> meta data block => MinKey:14  MaxKey:57
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> wrote 24 bytes to header block...
+LSMTREE >> 
+LSMTREE >> header block => &{24 95 105}
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:5  value:"e" key:21  value:"u" key:25  value:"y" key:29  value:"ac" key:37  value:"g"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:5  value:"e" key:21  value:"u" key:25  value:"y" key:29  value:"ac" key:37  value:"g"] with size 36
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:39  value:"i" key:41  value:"k" key:42  value:"l" key:53  value:"w" key:58  value:"ab"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:39  value:"i" key:41  value:"k" key:42  value:"l" key:53  value:"w" key:58  value:"ab"] with size 36
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> index block min key : 5 offset : 0
+LSMTREE >> index block min key : 39 offset : 36
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> meta data block => MinKey:5  MaxKey:58
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> wrote 24 bytes to header block...
+LSMTREE >> 
+LSMTREE >> header block => &{24 96 106}
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:3  value:"c" key:4  value:"d" key:10  value:"j" key:11  value:"k" key:16  value:"p"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:3  value:"c" key:4  value:"d" key:10  value:"j" key:11  value:"k" key:16  value:"p"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:22  value:"v" key:27  value:"aa" key:30  value:"ad" key:34  value:"d" key:47  value:"q"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:22  value:"v" key:27  value:"aa" key:30  value:"ad" key:34  value:"d" key:47  value:"q"] with size 37
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> index block min key : 3 offset : 0
+LSMTREE >> index block min key : 22 offset : 35
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> meta data block => MinKey:3  MaxKey:47
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> wrote 24 bytes to header block...
+LSMTREE >> 
+LSMTREE >> header block => &{24 96 106}
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> data partition => [key:7  value:"g" key:8  value:"h" key:12  value:"l" key:15  value:"o" key:31  value:"a"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:7  value:"g" key:8  value:"h" key:12  value:"l" key:15  value:"o" key:31  value:"a"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:35  value:"e" key:38  value:"h" key:49  value:"s" key:51  value:"u" key:59  value:"ac"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:35  value:"e" key:38  value:"h" key:49  value:"s" key:51  value:"u" key:59  value:"ac"] with size 36
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> index block min key : 7 offset : 0
+LSMTREE >> index block min key : 35 offset : 35
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> meta data block => MinKey:7  MaxKey:59
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> wrote 24 bytes to header block...
+LSMTREE >> 
+LSMTREE >> header block => &{24 95 105}
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:2  value:"b" key:5  value:"e" key:14  value:"n" key:17  value:"q" key:19  value:"s"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:2  value:"b" key:5  value:"e" key:14  value:"n" key:17  value:"q" key:19  value:"s"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:21  value:"u" key:24  value:"x" key:25  value:"y" key:28  value:"ab" key:29  value:"ac"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:21  value:"u" key:24  value:"x" key:25  value:"y" key:28  value:"ab" key:29  value:"ac"] with size 37
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:32  value:"b" key:33  value:"c" key:36  value:"f" key:37  value:"g" key:39  value:"i"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:32  value:"b" key:33  value:"c" key:36  value:"f" key:37  value:"g" key:39  value:"i"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:41  value:"k" key:42  value:"l" key:43  value:"m" key:44  value:"n" key:45  value:"o"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:41  value:"k" key:42  value:"l" key:43  value:"m" key:44  value:"n" key:45  value:"o"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:46  value:"p" key:48  value:"r" key:50  value:"t" key:52  value:"v" key:53  value:"w"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:46  value:"p" key:48  value:"r" key:50  value:"t" key:52  value:"v" key:53  value:"w"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:54  value:"x" key:55  value:"y" key:57  value:"aa" key:58  value:"ab" key:60  value:"ad"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:54  value:"x" key:55  value:"y" key:57  value:"aa" key:58  value:"ab" key:60  value:"ad"] with size 38
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> index block min key : 2 offset : 0
+LSMTREE >> index block min key : 21 offset : 35
+LSMTREE >> index block min key : 32 offset : 72
+LSMTREE >> index block min key : 41 offset : 107
+LSMTREE >> index block min key : 46 offset : 142
+LSMTREE >> index block min key : 54 offset : 177
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> meta data block => MinKey:2  MaxKey:60
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> wrote 24 bytes to header block...
+LSMTREE >> 
+LSMTREE >> header block => &{24 239 275}
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 now has 5 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:1  value:"a" key:6  value:"f" key:9  value:"i" key:13  value:"m" key:18  value:"r"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:1  value:"a" key:6  value:"f" key:9  value:"i" key:13  value:"m" key:18  value:"r"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:20  value:"t" key:23  value:"w" key:26  value:"z" key:40  value:"j" key:56  value:"z"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:20  value:"t" key:23  value:"w" key:26  value:"z" key:40  value:"j" key:56  value:"z"] with size 35
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> index block min key : 1 offset : 0
+LSMTREE >> index block min key : 20 offset : 35
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> meta data block => MinKey:1  MaxKey:56
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> wrote 24 bytes to header block...
+LSMTREE >> 
+LSMTREE >> header block => &{24 94 104}
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:1  value:"a" key:3  value:"c" key:4  value:"d" key:6  value:"f" key:7  value:"g"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:1  value:"a" key:3  value:"c" key:4  value:"d" key:6  value:"f" key:7  value:"g"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:8  value:"h" key:9  value:"i" key:10  value:"j" key:11  value:"k" key:12  value:"l"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:8  value:"h" key:9  value:"i" key:10  value:"j" key:11  value:"k" key:12  value:"l"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:13  value:"m" key:15  value:"o" key:16  value:"p" key:18  value:"r" key:20  value:"t"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:13  value:"m" key:15  value:"o" key:16  value:"p" key:18  value:"r" key:20  value:"t"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:22  value:"v" key:23  value:"w" key:26  value:"z" key:27  value:"aa" key:30  value:"ad"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:22  value:"v" key:23  value:"w" key:26  value:"z" key:27  value:"aa" key:30  value:"ad"] with size 37
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:31  value:"a" key:34  value:"d" key:35  value:"e" key:38  value:"h" key:40  value:"j"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:31  value:"a" key:34  value:"d" key:35  value:"e" key:38  value:"h" key:40  value:"j"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:47  value:"q" key:49  value:"s" key:51  value:"u" key:56  value:"z" key:59  value:"ac"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:47  value:"q" key:49  value:"s" key:51  value:"u" key:56  value:"z" key:59  value:"ac"] with size 36
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> index block min key : 1 offset : 0
+LSMTREE >> index block min key : 8 offset : 35
+LSMTREE >> index block min key : 13 offset : 70
+LSMTREE >> index block min key : 22 offset : 105
+LSMTREE >> index block min key : 31 offset : 142
+LSMTREE >> index block min key : 47 offset : 177
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> meta data block => MinKey:1  MaxKey:59
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> wrote 24 bytes to header block...
+LSMTREE >> 
+LSMTREE >> header block => &{24 237 273}
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:1  value:"a" key:2  value:"b" key:3  value:"c" key:4  value:"d" key:5  value:"e"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:1  value:"a" key:2  value:"b" key:3  value:"c" key:4  value:"d" key:5  value:"e"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:6  value:"f" key:7  value:"g" key:8  value:"h" key:9  value:"i" key:10  value:"j"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:6  value:"f" key:7  value:"g" key:8  value:"h" key:9  value:"i" key:10  value:"j"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:11  value:"k" key:12  value:"l" key:13  value:"m" key:14  value:"n" key:15  value:"o"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:11  value:"k" key:12  value:"l" key:13  value:"m" key:14  value:"n" key:15  value:"o"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:16  value:"p" key:17  value:"q" key:18  value:"r" key:19  value:"s" key:20  value:"t"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:16  value:"p" key:17  value:"q" key:18  value:"r" key:19  value:"s" key:20  value:"t"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:21  value:"u" key:22  value:"v" key:23  value:"w" key:24  value:"x" key:25  value:"y"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:21  value:"u" key:22  value:"v" key:23  value:"w" key:24  value:"x" key:25  value:"y"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:26  value:"z" key:27  value:"aa" key:28  value:"ab" key:29  value:"ac" key:30  value:"ad"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:26  value:"z" key:27  value:"aa" key:28  value:"ab" key:29  value:"ac" key:30  value:"ad"] with size 39
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:31  value:"a" key:32  value:"b" key:33  value:"c" key:34  value:"d" key:35  value:"e"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:31  value:"a" key:32  value:"b" key:33  value:"c" key:34  value:"d" key:35  value:"e"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:36  value:"f" key:37  value:"g" key:38  value:"h" key:39  value:"i" key:40  value:"j"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:36  value:"f" key:37  value:"g" key:38  value:"h" key:39  value:"i" key:40  value:"j"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:41  value:"k" key:42  value:"l" key:43  value:"m" key:44  value:"n" key:45  value:"o"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:41  value:"k" key:42  value:"l" key:43  value:"m" key:44  value:"n" key:45  value:"o"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:46  value:"p" key:47  value:"q" key:48  value:"r" key:49  value:"s" key:50  value:"t"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:46  value:"p" key:47  value:"q" key:48  value:"r" key:49  value:"s" key:50  value:"t"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:51  value:"u" key:52  value:"v" key:53  value:"w" key:54  value:"x" key:55  value:"y"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:51  value:"u" key:52  value:"v" key:53  value:"w" key:54  value:"x" key:55  value:"y"] with size 35
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data partition => [key:56  value:"z" key:57  value:"aa" key:58  value:"ab" key:59  value:"ac" key:60  value:"ad"]
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> data block [key:56  value:"z" key:57  value:"aa" key:58  value:"ab" key:59  value:"ac" key:60  value:"ad"] with size 39
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> index block min key : 1 offset : 0
+LSMTREE >> index block min key : 6 offset : 35
+LSMTREE >> index block min key : 11 offset : 70
+LSMTREE >> index block min key : 16 offset : 105
+LSMTREE >> index block min key : 21 offset : 140
+LSMTREE >> index block min key : 26 offset : 175
+LSMTREE >> index block min key : 31 offset : 214
+LSMTREE >> index block min key : 36 offset : 249
+LSMTREE >> index block min key : 41 offset : 284
+LSMTREE >> index block min key : 46 offset : 319
+LSMTREE >> index block min key : 51 offset : 354
+LSMTREE >> index block min key : 56 offset : 389
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> meta data block => MinKey:1  MaxKey:60
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> wrote 24 bytes to header block...
+LSMTREE >> 
+LSMTREE >> header block => &{24 452 530}
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> ////////        WRITE PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 5 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 5 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 5 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 5 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 5 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 5 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 5 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 5 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 1 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 2 sstables...
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 4 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 5 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue
+LSMTREE >> 
+LSMTREE >> level 0 now has 3 sstables...
+LSMTREE >> 
+LSMTREE >> pushing level 0 to compaction queue

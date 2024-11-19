@@ -34,7 +34,7 @@ func searchInDataBlock(key int64, dataBlock *proto_files.DataBlock) (value strin
 		mid := l + (h-l)/2
 
 		midKey := dataBlock.Data[mid].Key
-		logger.Printf("current key value pair : key %d value %s", midKey, dataBlock.Data[mid].Value)
+		sstableLogger.Printf("current key value pair : key %d value %s", midKey, dataBlock.Data[mid].Value)
 
 		if midKey == key {
 			return dataBlock.Data[mid].Value, true
@@ -64,12 +64,12 @@ func MergeDataBlock(kv1 []*proto_files.KeyValuePair, sequenceNumber1 int64, kv2 
 	for x < len(kv1) && y < len(kv2) {
 
 		if kv1[x].Value == "tombstone" {
-			logger.Printf("ignoring key value pair with key %d", kv1[x].Key)
+			sstableLogger.Printf("ignoring key value pair with key %d", kv1[x].Key)
 			x++
 			continue
 		}
 		if kv2[y].Value == "tombstone" {
-			logger.Printf("ignoring key value pair with key %d", kv2[y].Key)
+			sstableLogger.Printf("ignoring key value pair with key %d", kv2[y].Key)
 			y++
 			continue
 		}
@@ -78,7 +78,7 @@ func MergeDataBlock(kv1 []*proto_files.KeyValuePair, sequenceNumber1 int64, kv2 
 				result = append(result, &proto_files.KeyValuePair{Key: kv1[x].Key, Value: kv1[x].Value})
 
 			} else {
-				logger.Printf("ignoring key value pair with key %d", kv1[x].Key)
+				sstableLogger.Printf("ignoring key value pair with key %d", kv1[x].Key)
 			}
 			x++
 		} else if kv1[x].Key > kv2[y].Key {
@@ -86,7 +86,7 @@ func MergeDataBlock(kv1 []*proto_files.KeyValuePair, sequenceNumber1 int64, kv2 
 				result = append(result, &proto_files.KeyValuePair{Key: kv2[y].Key, Value: kv2[y].Value})
 
 			} else {
-				logger.Printf("ignoring key value pair with key %d", kv2[y].Key)
+				sstableLogger.Printf("ignoring key value pair with key %d", kv2[y].Key)
 			}
 			y++
 
@@ -97,7 +97,7 @@ func MergeDataBlock(kv1 []*proto_files.KeyValuePair, sequenceNumber1 int64, kv2 
 					result = append(result, &proto_files.KeyValuePair{Key: kv1[x].Key, Value: kv1[x].Value})
 
 				} else {
-					logger.Printf("ignoring key value pair with key %d", kv1[x].Key)
+					sstableLogger.Printf("ignoring key value pair with key %d", kv1[x].Key)
 				}
 				x++
 			} else {
@@ -105,7 +105,7 @@ func MergeDataBlock(kv1 []*proto_files.KeyValuePair, sequenceNumber1 int64, kv2 
 					result = append(result, &proto_files.KeyValuePair{Key: kv2[y].Key, Value: kv2[y].Value})
 
 				} else {
-					logger.Printf("ignoring key value pair with key %d", kv2[y].Key)
+					sstableLogger.Printf("ignoring key value pair with key %d", kv2[y].Key)
 				}
 				y++
 			}
@@ -117,7 +117,7 @@ func MergeDataBlock(kv1 []*proto_files.KeyValuePair, sequenceNumber1 int64, kv2 
 			result = append(result, &proto_files.KeyValuePair{Key: kv1[x].Key, Value: kv1[x].Value})
 
 		} else {
-			logger.Printf("ignoring key value pair with key %d", kv1[x].Key)
+			sstableLogger.Printf("ignoring key value pair with key %d", kv1[x].Key)
 
 		}
 		x++
@@ -129,7 +129,7 @@ func MergeDataBlock(kv1 []*proto_files.KeyValuePair, sequenceNumber1 int64, kv2 
 			result = append(result, &proto_files.KeyValuePair{Key: kv2[y].Key, Value: kv2[y].Value})
 
 		} else {
-			logger.Printf("ignoring key value pair with key %d", kv2[y].Key)
+			sstableLogger.Printf("ignoring key value pair with key %d", kv2[y].Key)
 
 		}
 		y++

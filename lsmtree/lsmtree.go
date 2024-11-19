@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 	"sync"
-	"time"
 
 	memtable "github.com/Adarsh-Kmt/LSMTree/memtable"
 	sst "github.com/Adarsh-Kmt/LSMTree/sstable"
@@ -14,25 +13,27 @@ import (
 var (
 	maxLevelMap = map[int]int{
 		0: 2,
-		1: 4,
+		1: 1,
 		2: 8,
 		3: 16,
 	}
-	///logFile, _ = os.OpenFile("log_file.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	logFile, _ = os.OpenFile("write_log.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 
-	logger = log.New(os.Stdout, "LSMTREE >> ", 0)
+	writeLogger = log.New(logFile, "LSMTREE >> ", 0)
 )
 
 type LSMTree struct {
-	RWMMutex        *sync.RWMutex
-	currMEMTable    *memtable.SkipList
-	frozenMEMTables []*memtable.SkipList
-	SSTableLevels   []sst.SSTableLevel
-	//flushMEMTableChannel <-chan memtable.MEMTable
-	compactLevelChannel chan int
+	currMEMTableRWMutex *sync.RWMutex
+	currMEMTable        memtable.MEMTable
+	SSTableLevels       []sst.SSTableLevel
 
-	ctx context.Context
-	Wg  sync.WaitGroup
+	flushMEMTableQueue   []memtable.MEMTable
+	flushMEMTableChannel chan struct{}
+	flushMEMTableRWMutex *sync.RWMutex
+
+	compactLevelChannel chan int
+	ctx                 context.Context
+	Wg                  sync.WaitGroup
 }
 
 func LSMTreeInit(numberOfSSTableLevels int) *LSMTree {
@@ -54,26 +55,80 @@ func LSMTreeInit(numberOfSSTableLevels int) *LSMTree {
 	lsmtree := &LSMTree{
 
 		currMEMTable:        memtable.SkipListInit(16),
-		frozenMEMTables:     make([]*memtable.SkipList, 0),
-		SSTableLevels:       sstLevels,
+		currMEMTableRWMutex: &sync.RWMutex{},
+
+		flushMEMTableQueue:   make([]memtable.MEMTable, 0),
+		flushMEMTableChannel: make(chan struct{}),
+		flushMEMTableRWMutex: &sync.RWMutex{},
+
+		SSTableLevels: sstLevels,
+
 		compactLevelChannel: make(chan int, 100),
-		ctx:                 context.Background(),
-		Wg:                  sync.WaitGroup{},
-		RWMMutex:            &sync.RWMutex{},
+
+		ctx: context.Background(),
+		Wg:  sync.WaitGroup{},
 	}
 
-	lsmtree.Wg.Add(1)
+	lsmtree.Wg.Add(2)
 	go lsmtree.BackgroundCompaction()
-
+	go lsmtree.BackgroundMEMTableFlush()
 	return lsmtree
 }
 
+func (lsmtree *LSMTree) BackgroundMEMTableFlush() {
+
+	for {
+
+		select {
+
+		case <-lsmtree.ctx.Done():
+
+			lsmtree.flushMEMTableRWMutex.Lock()
+			if len(lsmtree.flushMEMTableQueue) == 0 {
+				return
+			}
+			lsmtree.flushMEMTableRWMutex.Unlock()
+
+		case <-lsmtree.flushMEMTableChannel:
+			if err := lsmtree.flushMEMTable(); err != nil {
+				log.Printf("error while flushing MEMTable to disk : %s", err.Error())
+				return
+			}
+		}
+	}
+}
+
+func (lsmtree *LSMTree) flushMEMTable() (err error) {
+
+	lsmtree.flushMEMTableRWMutex.Lock()
+	memTable := lsmtree.flushMEMTableQueue[0]
+	lsmtree.flushMEMTableQueue = lsmtree.flushMEMTableQueue[1:]
+	lsmtree.flushMEMTableRWMutex.Unlock()
+
+	var sstable *sst.SSTable
+	if sstable, err = sst.SSTableInit(memTable.GetAllItems(), int64(memTable.GetMinKey()), int64(memTable.GetMaxKey())); err != nil {
+		return err
+	}
+
+	lsmtree.SSTableLevels[0].RWMutex.Lock()
+	lsmtree.SSTableLevels[0].SSTables = append(lsmtree.SSTableLevels[0].SSTables, *sstable)
+	writeLogger.Println()
+	writeLogger.Printf("level %d now has %d sstables...", 0, len(lsmtree.SSTableLevels[0].SSTables))
+	writeLogger.Println()
+	if len(lsmtree.SSTableLevels[0].SSTables) > maxLevelMap[0] {
+		writeLogger.Println("pushing level 0 to compaction queue")
+		lsmtree.compactLevelChannel <- 0
+	}
+	lsmtree.SSTableLevels[0].RWMutex.Unlock()
+
+	return nil
+}
 func (lsmtree *LSMTree) Get(key int) (value string, found bool) {
 
-	lsmtree.RWMMutex.RLock()
+	lsmtree.currMEMTableRWMutex.RLock()
 	if value, found = lsmtree.currMEMTable.Get(key); found {
 
-		lsmtree.RWMMutex.RUnlock()
+		lsmtree.currMEMTableRWMutex.RUnlock()
 		if value == "tombstone" {
 			return "", false
 		}
@@ -81,11 +136,11 @@ func (lsmtree *LSMTree) Get(key int) (value string, found bool) {
 		return value, found
 	}
 
-	lsmtree.RWMMutex.RUnlock()
+	lsmtree.currMEMTableRWMutex.RUnlock()
 
-	for _, frozenMEMTable := range lsmtree.frozenMEMTables {
+	for _, frozenMEMTable := range lsmtree.flushMEMTableQueue {
 
-		if key >= frozenMEMTable.MinKey && key <= frozenMEMTable.MaxKey {
+		if key >= frozenMEMTable.GetMinKey() && key <= frozenMEMTable.GetMaxKey() {
 
 			if value, found = frozenMEMTable.Get(key); found {
 
@@ -107,6 +162,7 @@ func (lsmtree *LSMTree) Get(key int) (value string, found bool) {
 			var err error
 			if value, err = sstable.Get(int64(key)); err == nil {
 
+				level.RWMutex.RUnlock()
 				if value == "tombstone" {
 					return "", false
 				}
@@ -120,60 +176,68 @@ func (lsmtree *LSMTree) Get(key int) (value string, found bool) {
 
 func (lsmtree *LSMTree) Put(key int, value string) (err error) {
 
-	lsmtree.RWMMutex.Lock()
+	lsmtree.currMEMTableRWMutex.Lock()
 	lsmtree.currMEMTable.Put(key, value)
-	lsmtree.RWMMutex.Unlock()
+	lsmtree.currMEMTableRWMutex.Unlock()
 
-	lsmtree.currMEMTable.DisplaySkipList()
-	if lsmtree.currMEMTable.Size >= 10 {
+	lsmtree.currMEMTable.Display()
+	if lsmtree.currMEMTable.GetSize() >= 10 {
 
-		var sstable *sst.SSTable
-		if sstable, err = sst.SSTableInit(lsmtree.currMEMTable.GetAllItems(), int64(lsmtree.currMEMTable.MinKey), int64(lsmtree.currMEMTable.MaxKey)); err != nil {
-			return err
-		}
+		lsmtree.flushMEMTableRWMutex.Lock()
+		lsmtree.flushMEMTableQueue = append(lsmtree.flushMEMTableQueue, lsmtree.currMEMTable)
+		lsmtree.flushMEMTableRWMutex.Unlock()
+
+		lsmtree.flushMEMTableChannel <- struct{}{}
+		// var sstable *sst.SSTable
+		// if sstable, err = sst.SSTableInit(lsmtree.currMEMTable.GetAllItems(), int64(lsmtree.currMEMTable.GetMinKey()), int64(lsmtree.currMEMTable.GetMaxKey())); err != nil {
+		// 	return err
+		// }
+		lsmtree.currMEMTableRWMutex.Lock()
 		lsmtree.currMEMTable = memtable.SkipListInit(16)
+		lsmtree.currMEMTableRWMutex.Unlock()
+		// lsmtree.SSTableLevels[0].RWMutex.Lock()
+		// lsmtree.SSTableLevels[0].SSTables = append(lsmtree.SSTableLevels[0].SSTables, *sstable)
 
-		lsmtree.SSTableLevels[0].RWMutex.Lock()
-		lsmtree.SSTableLevels[0].SSTables = append(lsmtree.SSTableLevels[0].SSTables, *sstable)
-		logger.Println()
-		logger.Printf("level %d now has %d sstables...", 0, len(lsmtree.SSTableLevels[0].SSTables))
-		logger.Println()
-		lsmtree.SSTableLevels[0].RWMutex.Unlock()
+		// lsmtree.SSTableLevels[0].RWMutex.Unlock()
 
-		if len(lsmtree.SSTableLevels[0].SSTables) > maxLevelMap[0] {
-			logger.Println("pushing level 0 to compaction queue")
-			lsmtree.compactLevelChannel <- 0
-		}
+		// if len(lsmtree.SSTableLevels[0].SSTables) > maxLevelMap[0] {
+		// 	logger.Println("pushing level 0 to compaction queue")
+		// 	lsmtree.compactLevelChannel <- 0
+		// }
 	}
 	return nil
 }
 
 func (lsmtree *LSMTree) Delete(key int) (err error) {
 
-	lsmtree.RWMMutex.Lock()
+	lsmtree.currMEMTableRWMutex.Lock()
 	lsmtree.currMEMTable.Delete(key)
-	lsmtree.RWMMutex.Unlock()
+	lsmtree.currMEMTableRWMutex.Unlock()
 
-	lsmtree.currMEMTable.DisplaySkipList()
-	if lsmtree.currMEMTable.Size >= 10 {
+	lsmtree.currMEMTable.Display()
+	if lsmtree.currMEMTable.GetSize() >= 10 {
 
-		var sstable *sst.SSTable
-		if sstable, err = sst.SSTableInit(lsmtree.currMEMTable.GetAllItems(), int64(lsmtree.currMEMTable.MinKey), int64(lsmtree.currMEMTable.MaxKey)); err != nil {
-			return err
-		}
+		lsmtree.flushMEMTableRWMutex.Lock()
+		lsmtree.flushMEMTableQueue = append(lsmtree.flushMEMTableQueue, lsmtree.currMEMTable)
+		lsmtree.flushMEMTableRWMutex.Unlock()
+
+		lsmtree.flushMEMTableChannel <- struct{}{}
+		// var sstable *sst.SSTable
+		// if sstable, err = sst.SSTableInit(lsmtree.currMEMTable.GetAllItems(), int64(lsmtree.currMEMTable.GetMinKey()), int64(lsmtree.currMEMTable.GetMaxKey())); err != nil {
+		// 	return err
+		// }
+		lsmtree.currMEMTableRWMutex.Lock()
 		lsmtree.currMEMTable = memtable.SkipListInit(16)
+		lsmtree.currMEMTableRWMutex.Unlock()
+		// lsmtree.SSTableLevels[0].RWMutex.Lock()
+		// lsmtree.SSTableLevels[0].SSTables = append(lsmtree.SSTableLevels[0].SSTables, *sstable)
 
-		lsmtree.SSTableLevels[0].RWMutex.Lock()
-		lsmtree.SSTableLevels[0].SSTables = append(lsmtree.SSTableLevels[0].SSTables, *sstable)
-		logger.Println()
-		logger.Printf("level %d now has %d sstables...", 0, len(lsmtree.SSTableLevels[0].SSTables))
-		logger.Println()
-		lsmtree.SSTableLevels[0].RWMutex.Unlock()
+		// lsmtree.SSTableLevels[0].RWMutex.Unlock()
 
-		if len(lsmtree.SSTableLevels[0].SSTables) > maxLevelMap[0] {
-			logger.Println("pushing level 0 to compaction queue")
-			lsmtree.compactLevelChannel <- 0
-		}
+		// if len(lsmtree.SSTableLevels[0].SSTables) > maxLevelMap[0] {
+		// 	logger.Println("pushing level 0 to compaction queue")
+		// 	lsmtree.compactLevelChannel <- 0
+		// }
 
 	}
 	return nil
@@ -183,10 +247,10 @@ func (lsmtree *LSMTree) LSMTreeSetup(kv map[int]string) {
 	for key, value := range kv {
 
 		if err := lsmtree.Put(key, value); err != nil {
-			logger.Printf("error : %s", err.Error())
+			log.Printf("error : %s", err.Error())
 			return
 		}
-		time.Sleep(500 * time.Millisecond)
+		//time.Sleep(500 * time.Millisecond)
 	}
-	logger.Println("setup complete")
+	log.Println("setup complete")
 }

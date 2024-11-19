@@ -2,11 +2,17 @@ package sstable
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"sync"
 
 	"github.com/Adarsh-Kmt/LSMTree/proto_files"
 	"github.com/willf/bloom"
+)
+
+var (
+	SSTableLogFile, _ = os.OpenFile("log_files/sstable_search_merge_log.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	sstableLogger     = log.New(SSTableLogFile, "LSMTREE >> ", 0)
 )
 
 type SSTableLevel struct {
@@ -55,7 +61,7 @@ func (sst *SSTable) Get(key int64) (value string, err error) {
 	}
 
 	if metaDataBlock.MaxKey < key || metaDataBlock.MinKey > key {
-		logger.Printf("based on meta data block of sst file, key is greater than max key / key is smaller than min key")
+		sstableLogger.Printf("based on meta data block of sst file, key is greater than max key / key is smaller than min key")
 		return "", fmt.Errorf("key does not exist in key range, acording to meta data block")
 	}
 	if indexBlock, err = ReadIndexBlock(f, headerBlock.IndexBlockOffset, headerBlock.MetaDataBlockOffset); err != nil {
@@ -64,7 +70,7 @@ func (sst *SSTable) Get(key int64) (value string, err error) {
 
 	index = searchInIndexBlock(key, indexBlock)
 
-	logger.Printf("search in %dth block in data block : ", index)
+	sstableLogger.Printf("search in %dth block in data block : ", index)
 	startOffset = headerBlock.DataBlockOffset + indexBlock.Index[index].Offset
 
 	if index == len(indexBlock.Index)-1 {
@@ -75,7 +81,7 @@ func (sst *SSTable) Get(key int64) (value string, err error) {
 
 	dataBlock, err := ReadDataPartition(f, startOffset, endOffset)
 
-	//logger.Printf("length of data partition : %d", len(dataBlock.Data))
+	//sstableLogger.Printf("length of data partition : %d", len(dataBlock.Data))
 	if err != nil {
 		return "", fmt.Errorf("error while reading data block : err => %s", err.Error())
 	}

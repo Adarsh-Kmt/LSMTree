@@ -1,0 +1,93 @@
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////    COMPACTION PROCESS     ///////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 has been sent for compaction...
+LSMTREE >> number of ss tables in level 0 are : 3
+LSMTREE >> merging files => 
+LSMTREE >> file sst_1.dat
+LSMTREE >> file sst_2.dat
+LSMTREE >> file sst_3.dat
+LSMTREE >> merged KV : [key:2 value:"b" key:3 value:"c" key:4 value:"d" key:19 value:"s" key:21 value:"u" key:23 value:"w" key:28 value:"ab" key:38 value:"h" key:54 value:"x" key:56 value:"z"]
+LSMTREE >> merged KV : [key:2 value:"b" key:3 value:"c" key:4 value:"d" key:13 value:"m" key:14 value:"n" key:15 value:"o" key:19 value:"s" key:21 value:"u" key:23 value:"w" key:27 value:"aa" key:28 value:"ab" key:32 value:"b" key:38 value:"h" key:46 value:"p" key:47 value:"q" key:49 value:"s" key:53 value:"w" key:54 value:"x" key:56 value:"z" key:57 value:"aa"]
+LSMTREE >> merged KV : [key:2 value:"b" key:3 value:"c" key:4 value:"d" key:7 value:"g" key:9 value:"i" key:11 value:"k" key:12 value:"l" key:13 value:"m" key:14 value:"n" key:15 value:"o" key:19 value:"s" key:21 value:"u" key:23 value:"w" key:25 value:"y" key:27 value:"aa" key:28 value:"ab" key:32 value:"b" key:34 value:"d" key:38 value:"h" key:39 value:"i" key:41 value:"k" key:46 value:"p" key:47 value:"q" key:49 value:"s" key:52 value:"v" key:53 value:"w" key:54 value:"x" key:55 value:"y" key:56 value:"z" key:57 value:"aa"]
+LSMTREE >> deleting file sst_1.dat from level 0
+LSMTREE >> deleting file sst_2.dat from level 0
+LSMTREE >> deleting file sst_3.dat from level 0
+LSMTREE >> 
+LSMTREE >> after compaction level 1 now has 1 sstables.. 
+LSMTREE >> file : sst_6.dat
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> reading merged sstable..
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////    COMPACTION PROCESS     ///////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////    COMPACTION PROCESS     ///////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 has been sent for compaction...
+LSMTREE >> number of ss tables in level 0 are : 3
+LSMTREE >> merging files => 
+LSMTREE >> file sst_4.dat
+LSMTREE >> file sst_5.dat
+LSMTREE >> file sst_7.dat
+LSMTREE >> merged KV : [key:5 value:"e" key:18 value:"r" key:22 value:"v" key:30 value:"ad" key:35 value:"e" key:36 value:"f" key:42 value:"l" key:44 value:"n" key:48 value:"r" key:59 value:"ac"]
+LSMTREE >> merged KV : [key:5 value:"e" key:8 value:"h" key:16 value:"p" key:18 value:"r" key:20 value:"t" key:22 value:"v" key:24 value:"x" key:29 value:"ac" key:30 value:"ad" key:31 value:"a" key:35 value:"e" key:36 value:"f" key:37 value:"g" key:42 value:"l" key:44 value:"n" key:45 value:"o" key:48 value:"r" key:51 value:"u" key:59 value:"ac" key:60 value:"ad"]
+LSMTREE >> merged KV : [key:1 value:"a" key:5 value:"e" key:6 value:"f" key:8 value:"h" key:10 value:"j" key:16 value:"p" key:17 value:"q" key:18 value:"r" key:20 value:"t" key:22 value:"v" key:24 value:"x" key:26 value:"z" key:29 value:"ac" key:30 value:"ad" key:31 value:"a" key:33 value:"c" key:35 value:"e" key:36 value:"f" key:37 value:"g" key:40 value:"j" key:42 value:"l" key:43 value:"m" key:44 value:"n" key:45 value:"o" key:48 value:"r" key:50 value:"t" key:51 value:"u" key:58 value:"ab" key:59 value:"ac" key:60 value:"ad"]
+LSMTREE >> deleting file sst_4.dat from level 0
+LSMTREE >> deleting file sst_5.dat from level 0
+LSMTREE >> deleting file sst_7.dat from level 0
+LSMTREE >> 
+LSMTREE >> after compaction level 1 now has 2 sstables.. 
+LSMTREE >> file : sst_6.dat
+LSMTREE >> file : sst_8.dat
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> reading merged sstable..
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////    COMPACTION PROCESS     ///////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////    COMPACTION PROCESS     ///////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 has been sent for compaction...
+LSMTREE >> number of ss tables in level 0 are : 0
+LSMTREE >> level 0 only has 0 ss tables, so no need for compaction
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////    COMPACTION PROCESS     ///////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 0 has been sent for compaction...
+LSMTREE >> number of ss tables in level 0 are : 0
+LSMTREE >> level 0 only has 0 ss tables, so no need for compaction
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////    COMPACTION PROCESS     ///////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> level 1 has been sent for compaction...
+LSMTREE >> number of ss tables in level 1 are : 2
+LSMTREE >> merging files => 
+LSMTREE >> file sst_6.dat
+LSMTREE >> file sst_8.dat
+LSMTREE >> merged KV : [key:1 value:"a" key:5 value:"e" key:6 value:"f" key:8 value:"h" key:10 value:"j" key:16 value:"p" key:17 value:"q" key:18 value:"r" key:20 value:"t" key:22 value:"v" key:24 value:"x" key:26 value:"z" key:29 value:"ac" key:30 value:"ad" key:31 value:"a" key:33 value:"c" key:35 value:"e" key:36 value:"f" key:37 value:"g" key:40 value:"j" key:42 value:"l" key:43 value:"m" key:44 value:"n" key:45 value:"o" key:48 value:"r" key:50 value:"t" key:51 value:"u" key:58 value:"ab" key:59 value:"ac" key:60 value:"ad"]
+LSMTREE >> merged KV : [key:1 value:"a" key:2 value:"b" key:3 value:"c" key:4 value:"d" key:5 value:"e" key:6 value:"f" key:7 value:"g" key:8 value:"h" key:9 value:"i" key:10 value:"j" key:11 value:"k" key:12 value:"l" key:13 value:"m" key:14 value:"n" key:15 value:"o" key:16 value:"p" key:17 value:"q" key:18 value:"r" key:19 value:"s" key:20 value:"t" key:21 value:"u" key:22 value:"v" key:23 value:"w" key:24 value:"x" key:25 value:"y" key:26 value:"z" key:27 value:"aa" key:28 value:"ab" key:29 value:"ac" key:30 value:"ad" key:31 value:"a" key:32 value:"b" key:33 value:"c" key:34 value:"d" key:35 value:"e" key:36 value:"f" key:37 value:"g" key:38 value:"h" key:39 value:"i" key:40 value:"j" key:41 value:"k" key:42 value:"l" key:43 value:"m" key:44 value:"n" key:45 value:"o" key:46 value:"p" key:47 value:"q" key:48 value:"r" key:49 value:"s" key:50 value:"t" key:51 value:"u" key:52 value:"v" key:53 value:"w" key:54 value:"x" key:55 value:"y" key:56 value:"z" key:57 value:"aa" key:58 value:"ab" key:59 value:"ac" key:60 value:"ad"]
+LSMTREE >> deleting file sst_6.dat from level 1
+LSMTREE >> deleting file sst_8.dat from level 1
+LSMTREE >> 
+LSMTREE >> after compaction level 2 now has 1 sstables.. 
+LSMTREE >> file : sst_9.dat
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> reading merged sstable..
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////    COMPACTION PROCESS     ///////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
