@@ -1,0 +1,976 @@
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 95 meta data block offset : 105
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 95, with size 10
+LSMTREE >> length of index block 2
+LSMTREE >> 
+LSMTREE >> min key 2 offset 0 
+LSMTREE >> min key 23 offset 35 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 2 max key : 56 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 59
+LSMTREE >> 
+LSMTREE >> key : 2 value b
+LSMTREE >> key : 3 value c
+LSMTREE >> key : 4 value d
+LSMTREE >> key : 19 value s
+LSMTREE >> key : 21 value u
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 59 until offset 95
+LSMTREE >> 
+LSMTREE >> key : 23 value w
+LSMTREE >> key : 28 value ab
+LSMTREE >> key : 38 value h
+LSMTREE >> key : 54 value x
+LSMTREE >> key : 56 value z
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 96 meta data block offset : 106
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 96, with size 10
+LSMTREE >> length of index block 2
+LSMTREE >> 
+LSMTREE >> min key 13 offset 0 
+LSMTREE >> min key 46 offset 36 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 13 max key : 57 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 60
+LSMTREE >> 
+LSMTREE >> key : 13 value m
+LSMTREE >> key : 14 value n
+LSMTREE >> key : 15 value o
+LSMTREE >> key : 27 value aa
+LSMTREE >> key : 32 value b
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 60 until offset 96
+LSMTREE >> 
+LSMTREE >> key : 46 value p
+LSMTREE >> key : 47 value q
+LSMTREE >> key : 49 value s
+LSMTREE >> key : 53 value w
+LSMTREE >> key : 57 value aa
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 94 meta data block offset : 104
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 94, with size 10
+LSMTREE >> length of index block 2
+LSMTREE >> 
+LSMTREE >> min key 7 offset 0 
+LSMTREE >> min key 34 offset 35 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 7 max key : 55 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 59
+LSMTREE >> 
+LSMTREE >> key : 7 value g
+LSMTREE >> key : 9 value i
+LSMTREE >> key : 11 value k
+LSMTREE >> key : 12 value l
+LSMTREE >> key : 25 value y
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 59 until offset 94
+LSMTREE >> 
+LSMTREE >> key : 34 value d
+LSMTREE >> key : 39 value i
+LSMTREE >> key : 41 value k
+LSMTREE >> key : 52 value v
+LSMTREE >> key : 55 value y
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 237 meta data block offset : 273
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 237, with size 36
+LSMTREE >> length of index block 6
+LSMTREE >> 
+LSMTREE >> min key 2 offset 0 
+LSMTREE >> min key 11 offset 35 
+LSMTREE >> min key 19 offset 70 
+LSMTREE >> min key 28 offset 106 
+LSMTREE >> min key 41 offset 142 
+LSMTREE >> min key 53 offset 177 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 2 max key : 57 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 59
+LSMTREE >> 
+LSMTREE >> key : 2 value b
+LSMTREE >> key : 3 value c
+LSMTREE >> key : 4 value d
+LSMTREE >> key : 7 value g
+LSMTREE >> key : 9 value i
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 59 until offset 94
+LSMTREE >> 
+LSMTREE >> key : 11 value k
+LSMTREE >> key : 12 value l
+LSMTREE >> key : 13 value m
+LSMTREE >> key : 14 value n
+LSMTREE >> key : 15 value o
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 94 until offset 130
+LSMTREE >> 
+LSMTREE >> key : 19 value s
+LSMTREE >> key : 21 value u
+LSMTREE >> key : 23 value w
+LSMTREE >> key : 25 value y
+LSMTREE >> key : 27 value aa
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 130 until offset 166
+LSMTREE >> 
+LSMTREE >> key : 28 value ab
+LSMTREE >> key : 32 value b
+LSMTREE >> key : 34 value d
+LSMTREE >> key : 38 value h
+LSMTREE >> key : 39 value i
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 166 until offset 201
+LSMTREE >> 
+LSMTREE >> key : 41 value k
+LSMTREE >> key : 46 value p
+LSMTREE >> key : 47 value q
+LSMTREE >> key : 49 value s
+LSMTREE >> key : 52 value v
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 201 until offset 237
+LSMTREE >> 
+LSMTREE >> key : 53 value w
+LSMTREE >> key : 54 value x
+LSMTREE >> key : 55 value y
+LSMTREE >> key : 56 value z
+LSMTREE >> key : 57 value aa
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 96 meta data block offset : 106
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 96, with size 10
+LSMTREE >> length of index block 2
+LSMTREE >> 
+LSMTREE >> min key 5 offset 0 
+LSMTREE >> min key 36 offset 36 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 5 max key : 59 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 60
+LSMTREE >> 
+LSMTREE >> key : 5 value e
+LSMTREE >> key : 18 value r
+LSMTREE >> key : 22 value v
+LSMTREE >> key : 30 value ad
+LSMTREE >> key : 35 value e
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 60 until offset 96
+LSMTREE >> 
+LSMTREE >> key : 36 value f
+LSMTREE >> key : 42 value l
+LSMTREE >> key : 44 value n
+LSMTREE >> key : 48 value r
+LSMTREE >> key : 59 value ac
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 96 meta data block offset : 106
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 96, with size 10
+LSMTREE >> length of index block 2
+LSMTREE >> 
+LSMTREE >> min key 8 offset 0 
+LSMTREE >> min key 31 offset 36 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 8 max key : 60 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 60
+LSMTREE >> 
+LSMTREE >> key : 8 value h
+LSMTREE >> key : 16 value p
+LSMTREE >> key : 20 value t
+LSMTREE >> key : 24 value x
+LSMTREE >> key : 29 value ac
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 60 until offset 96
+LSMTREE >> 
+LSMTREE >> key : 31 value a
+LSMTREE >> key : 37 value g
+LSMTREE >> key : 45 value o
+LSMTREE >> key : 51 value u
+LSMTREE >> key : 60 value ad
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 95 meta data block offset : 105
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 95, with size 10
+LSMTREE >> length of index block 2
+LSMTREE >> 
+LSMTREE >> min key 1 offset 0 
+LSMTREE >> min key 33 offset 35 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 1 max key : 58 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 59
+LSMTREE >> 
+LSMTREE >> key : 1 value a
+LSMTREE >> key : 6 value f
+LSMTREE >> key : 10 value j
+LSMTREE >> key : 17 value q
+LSMTREE >> key : 26 value z
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 59 until offset 95
+LSMTREE >> 
+LSMTREE >> key : 33 value c
+LSMTREE >> key : 40 value j
+LSMTREE >> key : 43 value m
+LSMTREE >> key : 50 value t
+LSMTREE >> key : 58 value ab
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 239 meta data block offset : 275
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 239, with size 36
+LSMTREE >> length of index block 6
+LSMTREE >> 
+LSMTREE >> min key 1 offset 0 
+LSMTREE >> min key 16 offset 35 
+LSMTREE >> min key 24 offset 70 
+LSMTREE >> min key 33 offset 107 
+LSMTREE >> min key 42 offset 142 
+LSMTREE >> min key 50 offset 177 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 1 max key : 60 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 59
+LSMTREE >> 
+LSMTREE >> key : 1 value a
+LSMTREE >> key : 5 value e
+LSMTREE >> key : 6 value f
+LSMTREE >> key : 8 value h
+LSMTREE >> key : 10 value j
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 59 until offset 94
+LSMTREE >> 
+LSMTREE >> key : 16 value p
+LSMTREE >> key : 17 value q
+LSMTREE >> key : 18 value r
+LSMTREE >> key : 20 value t
+LSMTREE >> key : 22 value v
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 94 until offset 131
+LSMTREE >> 
+LSMTREE >> key : 24 value x
+LSMTREE >> key : 26 value z
+LSMTREE >> key : 29 value ac
+LSMTREE >> key : 30 value ad
+LSMTREE >> key : 31 value a
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 131 until offset 166
+LSMTREE >> 
+LSMTREE >> key : 33 value c
+LSMTREE >> key : 35 value e
+LSMTREE >> key : 36 value f
+LSMTREE >> key : 37 value g
+LSMTREE >> key : 40 value j
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 166 until offset 201
+LSMTREE >> 
+LSMTREE >> key : 42 value l
+LSMTREE >> key : 43 value m
+LSMTREE >> key : 44 value n
+LSMTREE >> key : 45 value o
+LSMTREE >> key : 48 value r
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 201 until offset 239
+LSMTREE >> 
+LSMTREE >> key : 50 value t
+LSMTREE >> key : 51 value u
+LSMTREE >> key : 58 value ab
+LSMTREE >> key : 59 value ac
+LSMTREE >> key : 60 value ad
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 239 meta data block offset : 275
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 239, with size 36
+LSMTREE >> length of index block 6
+LSMTREE >> 
+LSMTREE >> min key 1 offset 0 
+LSMTREE >> min key 16 offset 35 
+LSMTREE >> min key 24 offset 70 
+LSMTREE >> min key 33 offset 107 
+LSMTREE >> min key 42 offset 142 
+LSMTREE >> min key 50 offset 177 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 1 max key : 60 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 59
+LSMTREE >> 
+LSMTREE >> key : 1 value a
+LSMTREE >> key : 5 value e
+LSMTREE >> key : 6 value f
+LSMTREE >> key : 8 value h
+LSMTREE >> key : 10 value j
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 59 until offset 94
+LSMTREE >> 
+LSMTREE >> key : 16 value p
+LSMTREE >> key : 17 value q
+LSMTREE >> key : 18 value r
+LSMTREE >> key : 20 value t
+LSMTREE >> key : 22 value v
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 94 until offset 131
+LSMTREE >> 
+LSMTREE >> key : 24 value x
+LSMTREE >> key : 26 value z
+LSMTREE >> key : 29 value ac
+LSMTREE >> key : 30 value ad
+LSMTREE >> key : 31 value a
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 131 until offset 166
+LSMTREE >> 
+LSMTREE >> key : 33 value c
+LSMTREE >> key : 35 value e
+LSMTREE >> key : 36 value f
+LSMTREE >> key : 37 value g
+LSMTREE >> key : 40 value j
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 166 until offset 201
+LSMTREE >> 
+LSMTREE >> key : 42 value l
+LSMTREE >> key : 43 value m
+LSMTREE >> key : 44 value n
+LSMTREE >> key : 45 value o
+LSMTREE >> key : 48 value r
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 201 until offset 239
+LSMTREE >> 
+LSMTREE >> key : 50 value t
+LSMTREE >> key : 51 value u
+LSMTREE >> key : 58 value ab
+LSMTREE >> key : 59 value ac
+LSMTREE >> key : 60 value ad
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 237 meta data block offset : 273
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 237, with size 36
+LSMTREE >> length of index block 6
+LSMTREE >> 
+LSMTREE >> min key 2 offset 0 
+LSMTREE >> min key 11 offset 35 
+LSMTREE >> min key 19 offset 70 
+LSMTREE >> min key 28 offset 106 
+LSMTREE >> min key 41 offset 142 
+LSMTREE >> min key 53 offset 177 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 2 max key : 57 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 59
+LSMTREE >> 
+LSMTREE >> key : 2 value b
+LSMTREE >> key : 3 value c
+LSMTREE >> key : 4 value d
+LSMTREE >> key : 7 value g
+LSMTREE >> key : 9 value i
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 59 until offset 94
+LSMTREE >> 
+LSMTREE >> key : 11 value k
+LSMTREE >> key : 12 value l
+LSMTREE >> key : 13 value m
+LSMTREE >> key : 14 value n
+LSMTREE >> key : 15 value o
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 94 until offset 130
+LSMTREE >> 
+LSMTREE >> key : 19 value s
+LSMTREE >> key : 21 value u
+LSMTREE >> key : 23 value w
+LSMTREE >> key : 25 value y
+LSMTREE >> key : 27 value aa
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 130 until offset 166
+LSMTREE >> 
+LSMTREE >> key : 28 value ab
+LSMTREE >> key : 32 value b
+LSMTREE >> key : 34 value d
+LSMTREE >> key : 38 value h
+LSMTREE >> key : 39 value i
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 166 until offset 201
+LSMTREE >> 
+LSMTREE >> key : 41 value k
+LSMTREE >> key : 46 value p
+LSMTREE >> key : 47 value q
+LSMTREE >> key : 49 value s
+LSMTREE >> key : 52 value v
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 201 until offset 237
+LSMTREE >> 
+LSMTREE >> key : 53 value w
+LSMTREE >> key : 54 value x
+LSMTREE >> key : 55 value y
+LSMTREE >> key : 56 value z
+LSMTREE >> key : 57 value aa
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> read 24 bytes of header data...
+LSMTREE >> header block => data block offset : 24, index block offset : 452 meta data block offset : 530
+LSMTREE >> 
+LSMTREE >> ------ HEADER BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading index block from file, starting at index 452, with size 78
+LSMTREE >> length of index block 12
+LSMTREE >> 
+LSMTREE >> min key 1 offset 0 
+LSMTREE >> min key 6 offset 35 
+LSMTREE >> min key 11 offset 70 
+LSMTREE >> min key 16 offset 105 
+LSMTREE >> min key 21 offset 140 
+LSMTREE >> min key 26 offset 175 
+LSMTREE >> min key 31 offset 214 
+LSMTREE >> min key 36 offset 249 
+LSMTREE >> min key 41 offset 284 
+LSMTREE >> min key 46 offset 319 
+LSMTREE >> min key 51 offset 354 
+LSMTREE >> min key 56 offset 389 
+LSMTREE >> 
+LSMTREE >> ------ INDEX BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> reading meta data block...
+LSMTREE >> 
+LSMTREE >> min key : 1 max key : 60 
+LSMTREE >> 
+LSMTREE >> ------ META DATA BLOCK -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 24 until offset 59
+LSMTREE >> 
+LSMTREE >> key : 1 value a
+LSMTREE >> key : 2 value b
+LSMTREE >> key : 3 value c
+LSMTREE >> key : 4 value d
+LSMTREE >> key : 5 value e
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 59 until offset 94
+LSMTREE >> 
+LSMTREE >> key : 6 value f
+LSMTREE >> key : 7 value g
+LSMTREE >> key : 8 value h
+LSMTREE >> key : 9 value i
+LSMTREE >> key : 10 value j
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 94 until offset 129
+LSMTREE >> 
+LSMTREE >> key : 11 value k
+LSMTREE >> key : 12 value l
+LSMTREE >> key : 13 value m
+LSMTREE >> key : 14 value n
+LSMTREE >> key : 15 value o
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 129 until offset 164
+LSMTREE >> 
+LSMTREE >> key : 16 value p
+LSMTREE >> key : 17 value q
+LSMTREE >> key : 18 value r
+LSMTREE >> key : 19 value s
+LSMTREE >> key : 20 value t
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 164 until offset 199
+LSMTREE >> 
+LSMTREE >> key : 21 value u
+LSMTREE >> key : 22 value v
+LSMTREE >> key : 23 value w
+LSMTREE >> key : 24 value x
+LSMTREE >> key : 25 value y
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 199 until offset 238
+LSMTREE >> 
+LSMTREE >> key : 26 value z
+LSMTREE >> key : 27 value aa
+LSMTREE >> key : 28 value ab
+LSMTREE >> key : 29 value ac
+LSMTREE >> key : 30 value ad
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 238 until offset 273
+LSMTREE >> 
+LSMTREE >> key : 31 value a
+LSMTREE >> key : 32 value b
+LSMTREE >> key : 33 value c
+LSMTREE >> key : 34 value d
+LSMTREE >> key : 35 value e
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 273 until offset 308
+LSMTREE >> 
+LSMTREE >> key : 36 value f
+LSMTREE >> key : 37 value g
+LSMTREE >> key : 38 value h
+LSMTREE >> key : 39 value i
+LSMTREE >> key : 40 value j
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 308 until offset 343
+LSMTREE >> 
+LSMTREE >> key : 41 value k
+LSMTREE >> key : 42 value l
+LSMTREE >> key : 43 value m
+LSMTREE >> key : 44 value n
+LSMTREE >> key : 45 value o
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 343 until offset 378
+LSMTREE >> 
+LSMTREE >> key : 46 value p
+LSMTREE >> key : 47 value q
+LSMTREE >> key : 48 value r
+LSMTREE >> key : 49 value s
+LSMTREE >> key : 50 value t
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 378 until offset 413
+LSMTREE >> 
+LSMTREE >> key : 51 value u
+LSMTREE >> key : 52 value v
+LSMTREE >> key : 53 value w
+LSMTREE >> key : 54 value x
+LSMTREE >> key : 55 value y
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> starting to read data block from offset 413 until offset 452
+LSMTREE >> 
+LSMTREE >> key : 56 value z
+LSMTREE >> key : 57 value aa
+LSMTREE >> key : 58 value ab
+LSMTREE >> key : 59 value ac
+LSMTREE >> key : 60 value ad
+LSMTREE >> 
+LSMTREE >> ------ DATA PARTITION -------
+LSMTREE >> 
+LSMTREE >> 
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> /////////        READ PROCESS        /////////
+LSMTREE >> ///////////////////////////////////////////////
+LSMTREE >> 
