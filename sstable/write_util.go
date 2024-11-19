@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sync"
 
 	"github.com/Adarsh-Kmt/LSMTree/proto_files"
 	"github.com/willf/bloom"
@@ -16,20 +17,24 @@ const (
 )
 
 var (
-	//logFile, _ = os.OpenFile("log_file.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	logger     = log.New(os.Stdout, "LSMTREE >> ", 0)
-	SST_Number = 1
+	writeLogFile, _ = os.OpenFile("log_files/write_log.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	writeLogger     = log.New(writeLogFile, "LSMTREE >> ", 0)
+	numLock         = &sync.Mutex{}
+	SST_Number      = 1
 )
 
 func SSTableInit(kv []*proto_files.KeyValuePair, minKey int64, maxKey int64) (*SSTable, error) {
-	logger.Println("///////////////////////////////////////////////")
-	logger.Println("////////        WRITE PROCESS        /////////")
-	logger.Println("///////////////////////////////////////////////")
-	logger.Println()
+	writeLogger.Println("///////////////////////////////////////////////")
+	writeLogger.Println("////////        WRITE PROCESS        /////////")
+	writeLogger.Println("///////////////////////////////////////////////")
+	writeLogger.Println()
 	var err error
 	var dataBlockBytes []byte
 	var metaDataBlockBytes []byte
 	var indexBlockBytes []byte
+
+	numLock.Lock()
+
 	sst := &SSTable{
 		FileName:    fmt.Sprintf("sst_%d.dat", SST_Number),
 		BloomFilter: bloom.New(10, 10),
@@ -40,9 +45,11 @@ func SSTableInit(kv []*proto_files.KeyValuePair, minKey int64, maxKey int64) (*S
 	if err != nil {
 		return nil, err
 	}
+	defer f.Close()
+	writeLogger.Printf("writing file : %s", sst.FileName)
 
 	SST_Number++
-	defer f.Close()
+	numLock.Unlock()
 
 	if dataBlockBytes, indexBlockBytes, err = CreateDataBlockAndIndexBlockBytes(kv); err != nil {
 		return nil, err
@@ -59,32 +66,32 @@ func SSTableInit(kv []*proto_files.KeyValuePair, minKey int64, maxKey int64) (*S
 	if err = binary.Write(f, binary.LittleEndian, dataBlockBytes); err != nil {
 		return nil, err
 	}
-	//logger.Printf("wrote %d bytes to data block...", len(dataBlockBytes))
+	//writeLogger.Printf("wrote %d bytes to data block...", len(dataBlockBytes))
 
 	if err = binary.Write(f, binary.LittleEndian, indexBlockBytes); err != nil {
 		return nil, err
 	}
 
-	//logger.Printf("wrote %d bytes to index block...", len(indexBlockBytes))
+	//writeLogger.Printf("wrote %d bytes to index block...", len(indexBlockBytes))
 
 	if err = binary.Write(f, binary.LittleEndian, metaDataBlockBytes); err != nil {
 		return nil, err
 	}
-	//logger.Printf("wrote %d bytes to meta data block...", len(metaDataBlockBytes))
+	//writeLogger.Printf("wrote %d bytes to meta data block...", len(metaDataBlockBytes))
 
-	logger.Println()
-	logger.Println("///////////////////////////////////////////////")
-	logger.Println("////////        WRITE PROCESS        /////////")
-	logger.Println("///////////////////////////////////////////////")
+	writeLogger.Println()
+	writeLogger.Println("///////////////////////////////////////////////")
+	writeLogger.Println("////////        WRITE PROCESS        /////////")
+	writeLogger.Println("///////////////////////////////////////////////")
 	return sst, nil
 }
 
 func WriteHeaderBlock(f *os.File, dataBlockSize int, indexBlockSize int) error {
 
-	logger.Println("------ HEADER BLOCK -------")
-	logger.Println()
-	logger.Printf("wrote %d bytes to header block...", 24)
-	logger.Println()
+	writeLogger.Println("------ HEADER BLOCK -------")
+	writeLogger.Println()
+	writeLogger.Printf("wrote %d bytes to header block...", 24)
+	writeLogger.Println()
 	header := &SSTableHeader{
 		DataBlockOffset:     int64(24),
 		IndexBlockOffset:    int64(24 + dataBlockSize),
@@ -92,11 +99,11 @@ func WriteHeaderBlock(f *os.File, dataBlockSize int, indexBlockSize int) error {
 	}
 
 	err := binary.Write(f, binary.LittleEndian, header)
-	logger.Printf("header block => %v", header)
+	writeLogger.Printf("header block => %v", header)
 
-	logger.Println()
-	logger.Println("------ HEADER BLOCK -------")
-	logger.Println()
+	writeLogger.Println()
+	writeLogger.Println("------ HEADER BLOCK -------")
+	writeLogger.Println()
 	return err
 }
 
@@ -110,8 +117,8 @@ func CreateDataBlockAndIndexBlockBytes(kv []*proto_files.KeyValuePair) (dataBloc
 
 	for i := 0; i < len(kv); i += 5 {
 
-		logger.Println("------ DATA PARTITION -------")
-		logger.Println()
+		writeLogger.Println("------ DATA PARTITION -------")
+		writeLogger.Println()
 		dbIndex := proto_files.IndexEntry{Offset: int64(dataBlockOffset)}
 
 		currkv := make([]*proto_files.KeyValuePair, 0)
@@ -122,32 +129,32 @@ func CreateDataBlockAndIndexBlockBytes(kv []*proto_files.KeyValuePair) (dataBloc
 			}
 			currkv = append(currkv, kv[j])
 		}
-		logger.Printf("data partition => %v", currkv)
-		logger.Println()
-		logger.Println("------ DATA PARTITION -------")
-		logger.Println()
+		writeLogger.Printf("data partition => %v", currkv)
+		writeLogger.Println()
+		writeLogger.Println("------ DATA PARTITION -------")
+		writeLogger.Println()
 		if dbBytes, err := proto.Marshal(&proto_files.DataBlock{Data: currkv}); err != nil {
 			return nil, nil, err
 
 		} else {
 			dataBlockOffset += len(dbBytes)
 			dataBlockBytes = append(dataBlockBytes, dbBytes...)
-			logger.Printf("data block %v with size %d", currkv, len(dbBytes))
+			writeLogger.Printf("data block %v with size %d", currkv, len(dbBytes))
 		}
 
 		Index = append(Index, &dbIndex)
 
 	}
 
-	logger.Println("------ INDEX BLOCK -------")
-	logger.Println()
+	writeLogger.Println("------ INDEX BLOCK -------")
+	writeLogger.Println()
 	for _, indexEntry := range Index {
-		logger.Printf("index block min key : %v offset : %d", indexEntry.MinKey, indexEntry.Offset)
+		writeLogger.Printf("index block min key : %v offset : %d", indexEntry.MinKey, indexEntry.Offset)
 
 	}
-	logger.Println()
-	logger.Println("------ INDEX BLOCK -------")
-	logger.Println()
+	writeLogger.Println()
+	writeLogger.Println("------ INDEX BLOCK -------")
+	writeLogger.Println()
 	indexBlock.Index = Index
 	if indexBlockBytes, err := proto.Marshal(indexBlock); err != nil {
 		return nil, nil, err
@@ -159,8 +166,8 @@ func CreateDataBlockAndIndexBlockBytes(kv []*proto_files.KeyValuePair) (dataBloc
 
 func CreateMetaDataBytes(minKey int64, maxKey int64) ([]byte, error) {
 
-	logger.Println("------ META DATA BLOCK -------")
-	logger.Println()
+	writeLogger.Println("------ META DATA BLOCK -------")
+	writeLogger.Println()
 	var metaDataBytes []byte
 	var err error
 	md := &proto_files.MetaDataBlock{
@@ -171,10 +178,10 @@ func CreateMetaDataBytes(minKey int64, maxKey int64) ([]byte, error) {
 	if metaDataBytes, err = proto.Marshal(md); err != nil {
 		return nil, err
 	}
-	logger.Printf("meta data block => %v", md)
-	logger.Println()
-	logger.Println("------ META DATA BLOCK -------")
-	logger.Println()
+	writeLogger.Printf("meta data block => %v", md)
+	writeLogger.Println()
+	writeLogger.Println("------ META DATA BLOCK -------")
+	writeLogger.Println()
 	return metaDataBytes, nil
 
 }
