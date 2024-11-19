@@ -24,6 +24,8 @@ type MEMTable interface {
 	GetAllItems() (kv []*proto_files.KeyValuePair)
 	GetMinKey() (key int)
 	GetMaxKey() (key int)
+	GetSize() (size int)
+	Display()
 }
 
 type Node struct {
@@ -197,4 +199,12 @@ func (sl *SkipList) GetMaxKey() (key int) {
 
 func (sl *SkipList) GetMinKey() (key int) {
 	return sl.MinKey
+}
+
+func (sl *SkipList) GetSize() (size int) {
+	return sl.Size
+}
+
+func (sl *SkipList) Display() {
+	sl.displaySkipList()
 }

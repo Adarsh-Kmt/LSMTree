@@ -4,7 +4,7 @@ import (
 	"slices"
 )
 
-func (sl *SkipList) SetupSkipList() {
+func (sl *SkipList) setupSkipList() {
 
 	kv := map[int]string{
 		1:  "adarsh",
@@ -76,7 +76,7 @@ func (sl *SkipList) getPredecessors(key int) (predecessors []*Node) {
 	return predecessors
 }
 
-func (sl *SkipList) DisplaySkipList() {
+func (sl *SkipList) displaySkipList() {
 
 	currNode := sl.Sentinel
 
